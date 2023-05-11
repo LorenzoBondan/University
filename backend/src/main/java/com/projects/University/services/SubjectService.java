@@ -1,5 +1,7 @@
 package com.projects.University.services;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.ClassDTO;
+import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.entities.Class;
+import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
 import com.projects.University.repositories.ClassRepository;
+import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.SubjectRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
@@ -27,11 +32,17 @@ public class SubjectService {
 	
 	@Autowired
 	private ClassRepository classRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 
 	@Transactional(readOnly = true)
-	public Page<SubjectDTO> findAllPaged(Pageable pageable) {
-		Page<Subject> list = repository.findAll(pageable);
-		return list.map(x -> new SubjectDTO(x));
+	public Page<SubjectDTO> findAllPaged(Long classId, Pageable pageable) {
+		List<Class> classes = (classId == 0) ? null :
+	 		Arrays.asList(classRepository.getOne(classId));
+	 	Page<Subject> page = repository.find(classes, pageable);
+	 	repository.findSubjectsWithClasses(page.getContent()); 
+	 	return page.map(x -> new SubjectDTO(x));
 	}
 
 	@Transactional(readOnly = true)
@@ -71,6 +82,11 @@ public class SubjectService {
 		for (ClassDTO classDto : dto.getClasses()) {
 			Class c = classRepository.getOne(classDto.getId());
 			entity.getClasses().add(c);
+		}
+		
+		for (CourseDTO courseDto : dto.getCourses()) {
+			Course c = courseRepository.getOne(courseDto.getId());
+			entity.getCourses().add(c);
 		}
 		
 	}

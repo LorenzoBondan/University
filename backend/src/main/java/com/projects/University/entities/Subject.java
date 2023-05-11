@@ -2,13 +2,17 @@ package com.projects.University.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +28,11 @@ public class Subject implements Serializable{
 	private String name;
 	private Integer semester;
 	
-	@OneToMany(mappedBy = "subject")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "subject")
 	private List<Class> classes = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "subjects")
+	private Set<Course> courses = new HashSet<>(); 
 	
 	public Subject() {}
 
@@ -62,6 +69,10 @@ public class Subject implements Serializable{
 
 	public List<Class> getClasses() {
 		return classes;
+	}
+
+	public Set<Course> getCourses() {
+		return courses;
 	}
 
 	@Override

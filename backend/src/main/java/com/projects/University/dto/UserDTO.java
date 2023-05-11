@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import com.projects.University.entities.Role;
 import com.projects.University.entities.User;
 
 public class UserDTO implements Serializable {
@@ -27,11 +25,15 @@ public class UserDTO implements Serializable {
 	private String imgUrl;
 	
 	private List<RoleDTO> roles = new ArrayList<>();
+	
+	private List<CourseDTO> courses = new ArrayList<>();
+	
+	private List<ClassDTO> classes = new ArrayList<>();
 	  
 	public UserDTO() {}
 
 	
-	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId, String imgUrl) {
+	public UserDTO(Long id, String name, String email, String password, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -39,7 +41,6 @@ public class UserDTO implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 	
-	// construtor implantado na classe UserService
 	public UserDTO(User entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -47,13 +48,10 @@ public class UserDTO implements Serializable {
 		this.imgUrl = entity.getImgUrl();
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
-
+		entity.getCourses().forEach(c -> this.courses.add(new CourseDTO(c)));
+		entity.getClasses().forEach(cla -> this.classes.add(new ClassDTO(cla)));
 	}
 
-	public UserDTO(User entity, Set<Role> roles) {
-		this(entity); 
-		roles.forEach(rol -> this.roles.add(new RoleDTO(rol))); 
-	}
 
 	public Long getId() {
 		return id;
@@ -93,6 +91,14 @@ public class UserDTO implements Serializable {
 	// SOMENTE O GET NAS LISTAS
 	public List<RoleDTO> getRoles() { 
 		return roles;
+	}
+
+	public List<CourseDTO> getCourses() {
+		return courses;
+	}
+
+	public List<ClassDTO> getClasses() {
+		return classes;
 	}
 
 

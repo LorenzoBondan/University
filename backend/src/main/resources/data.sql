@@ -29,15 +29,7 @@ INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('C', 30, 2);
 INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('D', 40, 3);
 INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('E', 50, 4);
 
-INSERT INTO tb_course_subject (course_id, subject_id) VALUES (1,1);
-INSERT INTO tb_course_subject (course_id, subject_id) VALUES (1,2);
-INSERT INTO tb_course_subject (course_id, subject_id) VALUES (2,3);
-INSERT INTO tb_course_subject (course_id, subject_id) VALUES (2,4);
 
-INSERT INTO tb_course_user (course_id, user_id) VALUES (1,1);
-INSERT INTO tb_course_user (course_id, user_id) VALUES (2,4);
 
-INSERT INTO tb_subject_student (subject_id, student_id) VALUES (1,1);
-INSERT INTO tb_subject_student (subject_id, student_id) VALUES (3,1);
-INSERT INTO tb_subject_student (subject_id, student_id) VALUES (4,2);
-INSERT INTO tb_subject_student (subject_id, student_id) VALUES (5,2);
+INSERT INTO tb_user_course (user_id, course_id) VALUES (1,1);
+

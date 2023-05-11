@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.projects.University.entities.Course;
+import com.projects.University.entities.Subject;
+import com.projects.University.entities.User;
 
 public class CourseDTO implements Serializable{
 
@@ -15,19 +18,17 @@ public class CourseDTO implements Serializable{
 	private String name;
 	private String imgUrl;
 	
-	private List<UserDTO> users = new ArrayList<>();
-	
 	private List<SubjectDTO> subjects = new ArrayList<>();
+	
+	//private List<UserDTO> users = new ArrayList<>();
 	
 	public CourseDTO() {}
 
-	public CourseDTO(Long id, String name, String imgUrl, List<UserDTO> users, List<SubjectDTO> subjects) {
+	public CourseDTO(Long id, String name, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.imgUrl = imgUrl;
-		this.users = users;
-		this.subjects = subjects;
 	}
 	
 	public CourseDTO(Course entity) {
@@ -35,8 +36,14 @@ public class CourseDTO implements Serializable{
 		this.name = entity.getName();
 		this.imgUrl = entity.getImgUrl();
 		
-		entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
 		entity.getSubjects().forEach(s -> this.subjects.add(new SubjectDTO(s)));
+		//entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
+	}
+	
+	public CourseDTO(Course entity, Set<Subject> subjects, Set<User> users) {
+		this(entity);
+		subjects.forEach(s -> this.subjects.add(new SubjectDTO(s)));
+		//users.forEach(s -> this.users.add(new UserDTO(s)));
 	}
 
 	public Long getId() {
@@ -63,13 +70,13 @@ public class CourseDTO implements Serializable{
 		this.imgUrl = imgUrl;
 	}
 
-	public List<UserDTO> getUsers() {
-		return users;
-	}
-
 	public List<SubjectDTO> getSubjects() {
 		return subjects;
 	}
+
+	//public List<UserDTO> getUsers() {
+		//return users;
+	//}
 
 	@Override
 	public int hashCode() {

@@ -28,7 +28,7 @@ public class Class implements Serializable{
 	private String code;
 	private Integer limitOfStudents;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id")
 	private Subject subject;
 	

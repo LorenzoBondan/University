@@ -29,22 +29,22 @@ public class CourseService {
 	private CourseRepository repository;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private SubjectRepository subjectRepository;
 	
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public Page<CourseDTO> findAllPaged(Pageable pageable) {
 		Page<Course> list = repository.findAll(pageable);
-		return list.map(x -> new CourseDTO(x));
+		return list.map(x -> new CourseDTO(x, x.getSubjects(), x.getUsers()));
 	}
 
 	@Transactional(readOnly = true)
 	public CourseDTO findById(Long id) {
 		Optional<Course> obj = repository.findById(id);
 		Course entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new CourseDTO(entity);
+		return new CourseDTO(entity, entity.getSubjects(), entity.getUsers());
 	}
 
 	@Transactional
@@ -79,11 +79,10 @@ public class CourseService {
 			entity.getSubjects().add(subject);
 		}
 		
-		entity.getUsers().clear();
-
-		for (UserDTO userDto : dto.getUsers()) {
-			User user = userRepository.getOne(userDto.getId());
-			entity.getUsers().add(user);
-		}
+		//for (UserDTO userDto : dto.getUsers()) {
+			//User user = userRepository.getOne(userDto.getId());
+			//entity.getUsers().add(user);
+		//}
+		
 	}
 }

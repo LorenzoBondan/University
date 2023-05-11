@@ -32,16 +32,12 @@ public class Course implements Serializable{
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_course_subject",
 				joinColumns = @JoinColumn(name = "course_id"), 
-				inverseJoinColumns = @JoinColumn(name = "subject_id")
-			)
+				inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Set<Subject> subjects = new HashSet<>();
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_course_user",
-				joinColumns = @JoinColumn(name = "course_id"), 
-				inverseJoinColumns = @JoinColumn(name = "user_id")
-			)
+	@ManyToMany(mappedBy = "courses")
 	private Set<User> users = new HashSet<>();
+	
 	
 	public Course() {}
 

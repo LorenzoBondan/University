@@ -65,7 +65,7 @@ public class ClassService {
 	private void copyDtoToEntity(ClassDTO dto, Class entity) {
 		entity.setCode(dto.getCode());
 		entity.setLimitOfStudents(dto.getLimitOfStudents());
-		entity.setSubject(dto.getSubject());
+		//entity.setSubject(dto.getSubject());
 
 		entity.getStudents().clear();
 

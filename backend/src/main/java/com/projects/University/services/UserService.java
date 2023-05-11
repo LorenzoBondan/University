@@ -1,6 +1,9 @@
 package com.projects.University.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -17,12 +20,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projects.University.dto.ClassDTO;
+import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.RoleDTO;
+import com.projects.University.dto.SubjectDTO;
 import com.projects.University.dto.UserDTO;
 import com.projects.University.dto.UserInsertDTO;
 import com.projects.University.dto.UserUpdateDTO;
+import com.projects.University.entities.Course;
 import com.projects.University.entities.Role;
+import com.projects.University.entities.Subject;
 import com.projects.University.entities.User;
+import com.projects.University.repositories.ClassRepository;
+import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.RoleRepository;
 import com.projects.University.repositories.UserRepository;
 import com.projects.University.services.exceptions.DataBaseException;
@@ -41,10 +51,17 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
+	
+	@Autowired
+	private ClassRepository classRepository;
 
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable) {
 		Page<User> list = repository.findAll(pageable);
+		repository.findUsersCourses(list.stream().collect(Collectors.toList()));
 		return list.map(x -> new UserDTO(x));
 	}
 
@@ -52,7 +69,7 @@ public class UserService implements UserDetailsService {
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity, entity.getRoles());
+		return new UserDTO(entity);
 	}
 	
 	
@@ -60,7 +77,7 @@ public class UserService implements UserDetailsService {
 	public UserDTO findByEmail(String email) {
 		Optional<User> obj = Optional.ofNullable(repository.findByEmail(email));
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity, entity.getRoles());
+		return new UserDTO(entity);
 	}
 
 	@Transactional
@@ -110,6 +127,16 @@ public class UserService implements UserDetailsService {
 			Role role = roleRepository.getOne(rolDto.getId());
 			entity.getRoles().add(role);
 		}
+		
+		for (CourseDTO courseDto : dto.getCourses()) {
+			Course course = courseRepository.getOne(courseDto.getId());
+			entity.getCourses().add(course);
+		}
+		
+		for (ClassDTO classDto : dto.getClasses()) {
+			com.projects.University.entities.Class c = classRepository.getOne(classDto.getId());
+			entity.getClasses().add(c);
+		}
 
 	}
 
@@ -125,5 +152,19 @@ public class UserService implements UserDetailsService {
 		return user;
 	}
 	
-	
+	// Find subjects from user's course
+	@Transactional(readOnly = true)
+	public List<SubjectDTO> findSubjectsFromCourseOfStudentId(Long id) {
+		
+		List<SubjectDTO> list = new ArrayList<>();
+		User user = repository.getOne(id);
+		
+		for(Course course : user.getCourses()) {
+			for(Subject subject : course.getSubjects()) {
+				list.add(new SubjectDTO(subject));
+			}
+		}
+
+		return list;
+	}
 }

@@ -1,6 +1,7 @@
 package com.projects.University.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projects.University.dto.SubjectDTO;
 import com.projects.University.dto.UserDTO;
 import com.projects.University.dto.UserInsertDTO;
 import com.projects.University.dto.UserUpdateDTO;
@@ -67,6 +69,12 @@ public class UserResource {
 	public ResponseEntity<UserDTO> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/{id}/subjects") 
+	public ResponseEntity<List<SubjectDTO>> findSubjectsFromCourseOfStudentId(@PathVariable Long id) {
+		List<SubjectDTO> list = service.findSubjectsFromCourseOfStudentId(id);	
+		return ResponseEntity.ok().body(list);
 	}
 	
 	

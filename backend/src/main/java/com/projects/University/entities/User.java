@@ -42,9 +42,17 @@ public class User implements UserDetails, Serializable{
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
 				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id")
-			)
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_user_course",
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "course_id"))
+	private Set<Course> courses = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "students")
+	private Set<Class> classes = new HashSet<>(); 
 	
 	public User() {
 	}
@@ -96,6 +104,14 @@ public class User implements UserDetails, Serializable{
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+	public Set<Class> getClasses() {
+		return classes;
 	}
 
 	@Override
