@@ -20,7 +20,6 @@ public class CourseDTO implements Serializable{
 	
 	private List<SubjectDTO> subjects = new ArrayList<>();
 	
-	//private List<UserDTO> users = new ArrayList<>();
 	
 	public CourseDTO() {}
 
@@ -37,13 +36,11 @@ public class CourseDTO implements Serializable{
 		this.imgUrl = entity.getImgUrl();
 		
 		entity.getSubjects().forEach(s -> this.subjects.add(new SubjectDTO(s)));
-		//entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
 	}
 	
 	public CourseDTO(Course entity, Set<Subject> subjects, Set<User> users) {
 		this(entity);
 		subjects.forEach(s -> this.subjects.add(new SubjectDTO(s)));
-		//users.forEach(s -> this.users.add(new UserDTO(s)));
 	}
 
 	public Long getId() {
@@ -74,9 +71,6 @@ public class CourseDTO implements Serializable{
 		return subjects;
 	}
 
-	//public List<UserDTO> getUsers() {
-		//return users;
-	//}
 
 	@Override
 	public int hashCode() {

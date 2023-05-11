@@ -12,13 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
-import com.projects.University.dto.UserDTO;
 import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
-import com.projects.University.entities.User;
 import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.SubjectRepository;
-import com.projects.University.repositories.UserRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
 
@@ -30,9 +27,6 @@ public class CourseService {
 	
 	@Autowired
 	private SubjectRepository subjectRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public Page<CourseDTO> findAllPaged(Pageable pageable) {
@@ -78,11 +72,6 @@ public class CourseService {
 			Subject subject = subjectRepository.getOne(subDto.getId());
 			entity.getSubjects().add(subject);
 		}
-		
-		//for (UserDTO userDto : dto.getUsers()) {
-			//User user = userRepository.getOne(userDto.getId());
-			//entity.getUsers().add(user);
-		//}
 		
 	}
 }

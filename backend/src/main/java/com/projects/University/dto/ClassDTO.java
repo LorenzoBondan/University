@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.projects.University.entities.Subject;
 
 public class ClassDTO {
 

@@ -13,13 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.ClassDTO;
-import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.entities.Class;
-import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
 import com.projects.University.repositories.ClassRepository;
-import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.SubjectRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
@@ -33,8 +30,6 @@ public class SubjectService {
 	@Autowired
 	private ClassRepository classRepository;
 	
-	@Autowired
-	private CourseRepository courseRepository;
 
 	@Transactional(readOnly = true)
 	public Page<SubjectDTO> findAllPaged(Long classId, Pageable pageable) {
@@ -84,10 +79,6 @@ public class SubjectService {
 			entity.getClasses().add(c);
 		}
 		
-		for (CourseDTO courseDto : dto.getCourses()) {
-			Course c = courseRepository.getOne(courseDto.getId());
-			entity.getCourses().add(c);
-		}
 		
 	}
 }
