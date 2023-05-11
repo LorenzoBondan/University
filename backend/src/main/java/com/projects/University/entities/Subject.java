@@ -1,12 +1,15 @@
 package com.projects.University.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Subject implements Serializable{
 	private Long id;
 	private String name;
 	private Integer semester;
+	
+	@OneToMany(mappedBy = "subject")
+	private List<Class> classes = new ArrayList<>();
 	
 	public Subject() {}
 
@@ -52,6 +58,10 @@ public class Subject implements Serializable{
 
 	public void setSemester(Integer semester) {
 		this.semester = semester;
+	}
+
+	public List<Class> getClasses() {
+		return classes;
 	}
 
 	@Override

@@ -1,13 +1,19 @@
 package com.projects.University.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +28,20 @@ public class Course implements Serializable{
 	private String name;
 	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_course_subject",
+				joinColumns = @JoinColumn(name = "course_id"), 
+				inverseJoinColumns = @JoinColumn(name = "subject_id")
+			)
+	private Set<Subject> subjects = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_course_user",
+				joinColumns = @JoinColumn(name = "course_id"), 
+				inverseJoinColumns = @JoinColumn(name = "user_id")
+			)
+	private Set<User> users = new HashSet<>();
 	
 	public Course() {}
 
@@ -54,6 +74,14 @@ public class Course implements Serializable{
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public Set<User> getUsers() {
+		return users;
 	}
 
 	@Override
