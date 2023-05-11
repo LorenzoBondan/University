@@ -12,25 +12,25 @@ public class ClassDTO {
 	private String code;
 	private Integer limitOfStudents;
 	
-	//private Subject subject;
+	private Long subjectId;
 	
 	private List<UserDTO> students = new ArrayList<>();
 	
 	public ClassDTO() {}
 
-	public ClassDTO(Long id, String code, Integer limitOfStudents, Subject subject) {
+	public ClassDTO(Long id, String code, Integer limitOfStudents, Long subjectId) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.limitOfStudents = limitOfStudents;
-		//this.subject = subject;
+		this.subjectId = subjectId;
 	}
 	
 	public ClassDTO(com.projects.University.entities.Class entity) {
 		this.id = entity.getId();
 		this.code = entity.getCode();
 		this.limitOfStudents = entity.getLimitOfStudents();
-		//this.subject = entity.getSubject();
+		this.subjectId = entity.getSubject().getId();
 		
 		entity.getStudents().forEach(s -> this.students.add(new UserDTO(s)));
 	}
@@ -59,13 +59,13 @@ public class ClassDTO {
 		this.limitOfStudents = limitOfStudents;
 	}
 
-	//public Subject getSubject() {
-		//return subject;
-	//}
+	public Long getSubjectId() {
+		return subjectId;
+	}
 
-	//public void setSubject(Subject subject) {
-		//this.subject = subject;
-	//}
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
+	}
 
 	public List<UserDTO> getStudents() {
 		return students;

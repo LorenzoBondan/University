@@ -15,6 +15,7 @@ import com.projects.University.dto.UserDTO;
 import com.projects.University.entities.Class;
 import com.projects.University.entities.User;
 import com.projects.University.repositories.ClassRepository;
+import com.projects.University.repositories.SubjectRepository;
 import com.projects.University.repositories.UserRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
@@ -27,6 +28,9 @@ public class ClassService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SubjectRepository subjectRepository;
 
 	@Transactional(readOnly = true)
 	public Page<ClassDTO> findAllPaged(Pageable pageable) {
@@ -65,7 +69,7 @@ public class ClassService {
 	private void copyDtoToEntity(ClassDTO dto, Class entity) {
 		entity.setCode(dto.getCode());
 		entity.setLimitOfStudents(dto.getLimitOfStudents());
-		//entity.setSubject(dto.getSubject());
+		entity.setSubject(subjectRepository.getOne(dto.getSubjectId()));
 
 		entity.getStudents().clear();
 
