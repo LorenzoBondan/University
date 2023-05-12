@@ -1,0 +1,27 @@
+.navbar{
+    padding: 0px !important;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-top{
+    height: 105px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-brand svg{
+    height: 50px;
+}
