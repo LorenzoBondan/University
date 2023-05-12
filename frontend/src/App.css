@@ -7,6 +7,7 @@
   margin-bottom: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none !important;
 }
 
 /* títulos principais do projeto estão em negrito */
@@ -52,4 +53,8 @@ ul {
 
 .form-control{
   color: black !important;
+}
+
+.color-primary{
+  color: #262058;
 }
