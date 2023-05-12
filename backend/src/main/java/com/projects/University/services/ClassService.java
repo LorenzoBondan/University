@@ -97,4 +97,20 @@ public class ClassService {
 			throw new ResourceNotFoundException("User or class Id not found " + classId + " " + userId);
 		}
 	}
+	
+	@Transactional
+	public ClassDTO unregisterInClass(Long classId, Long userId) {
+		try {
+			Class entity = repository.getOne(classId);
+			User user = userRepository.getOne(userId);
+			
+			entity.getStudents().remove(user);
+				
+			entity = repository.save(entity);
+			return new ClassDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("User or class Id not found " + classId + " " + userId);
+		}
+	}
 }

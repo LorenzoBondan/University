@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.projects.University.entities.Course;
-import com.projects.University.entities.Subject;
-import com.projects.University.entities.User;
 
 public class CourseDTO implements Serializable{
 
@@ -19,7 +16,7 @@ public class CourseDTO implements Serializable{
 	private String imgUrl;
 	
 	private List<SubjectDTO> subjects = new ArrayList<>();
-	
+	private List<UserDTO> users = new ArrayList<>();
 	
 	public CourseDTO() {}
 
@@ -36,11 +33,7 @@ public class CourseDTO implements Serializable{
 		this.imgUrl = entity.getImgUrl();
 		
 		entity.getSubjects().forEach(s -> this.subjects.add(new SubjectDTO(s)));
-	}
-	
-	public CourseDTO(Course entity, Set<Subject> subjects, Set<User> users) {
-		this(entity);
-		subjects.forEach(s -> this.subjects.add(new SubjectDTO(s)));
+		entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
 	}
 
 	public Long getId() {
@@ -71,6 +64,10 @@ public class CourseDTO implements Serializable{
 		return subjects;
 	}
 
+
+	public List<UserDTO> getUsers() {
+		return users;
+	}
 
 	@Override
 	public int hashCode() {

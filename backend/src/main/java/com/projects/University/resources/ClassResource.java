@@ -62,4 +62,10 @@ public class ClassResource {
 		return ResponseEntity.ok().body(c);
 	}
 	
+	@PutMapping(value = "/unregisterInClass/{classId}/{userId}")
+	public ResponseEntity<ClassDTO> unregisterInClass(@PathVariable Long classId, @PathVariable Long userId){
+		ClassDTO c = service.unregisterInClass(classId, userId);
+		return ResponseEntity.ok().body(c);
+	}
+	
 }

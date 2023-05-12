@@ -12,10 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
+import com.projects.University.dto.UserDTO;
 import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
+import com.projects.University.entities.User;
 import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.SubjectRepository;
+import com.projects.University.repositories.UserRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
 
@@ -27,18 +30,21 @@ public class CourseService {
 	
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public Page<CourseDTO> findAllPaged(Pageable pageable) {
 		Page<Course> list = repository.findAll(pageable);
-		return list.map(x -> new CourseDTO(x, x.getSubjects(), x.getUsers()));
+		return list.map(x -> new CourseDTO(x));
 	}
 
 	@Transactional(readOnly = true)
 	public CourseDTO findById(Long id) {
 		Optional<Course> obj = repository.findById(id);
 		Course entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new CourseDTO(entity, entity.getSubjects(), entity.getUsers());
+		return new CourseDTO(entity);
 	}
 
 	@Transactional
@@ -71,6 +77,13 @@ public class CourseService {
 		for (SubjectDTO subDto : dto.getSubjects()) {
 			Subject subject = subjectRepository.getOne(subDto.getId());
 			entity.getSubjects().add(subject);
+		}
+		
+		entity.getUsers().clear();
+
+		for (UserDTO userDto : dto.getUsers()) {
+			User user = userRepository.getOne(userDto.getId());
+			entity.getUsers().add(user);
 		}
 		
 	}
