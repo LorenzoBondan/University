@@ -89,8 +89,10 @@ public class ClassService {
 			User user = userRepository.getOne(userId);
 			
 			entity.getStudents().add(user);
+			user.getClasses().add(entity);
 			
 			entity = repository.save(entity);
+			user = userRepository.save(user);
 			return new ClassDTO(entity);
 		}
 		catch (EntityNotFoundException e) {
@@ -105,8 +107,10 @@ public class ClassService {
 			User user = userRepository.getOne(userId);
 			
 			entity.getStudents().remove(user);
-				
+			user.getClasses().remove(entity);
+			
 			entity = repository.save(entity);
+			user = userRepository.save(user);
 			return new ClassDTO(entity);
 		}
 		catch (EntityNotFoundException e) {

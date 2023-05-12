@@ -2,6 +2,8 @@ package com.projects.University.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -86,5 +88,43 @@ public class CourseService {
 			entity.getUsers().add(user);
 		}
 		
+	}
+	
+	@Transactional
+	public CourseDTO registerInCourse(Long courseId, Long userId) {
+		try {
+			Course entity = repository.getOne(courseId);
+			User user = userRepository.getOne(userId);
+			
+			entity.getUsers().add(user);
+			user.getCourses().add(entity);
+			
+			entity = repository.save(entity);
+			user = userRepository.save(user);
+			
+			return new CourseDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("User or course Id not found " + courseId + " " + userId);
+		}
+	}
+	
+	@Transactional
+	public CourseDTO unregisterInCourse(Long courseId, Long userId) {
+		try {
+			Course entity = repository.getOne(courseId);
+			User user = userRepository.getOne(userId);
+			
+			entity.getUsers().remove(user);
+			user.getCourses().remove(entity);
+			
+			entity = repository.save(entity);
+			user = userRepository.save(user);
+			
+			return new CourseDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("User or class Id not found " + courseId + " " + userId);
+		}
 	}
 }
