@@ -33,8 +33,8 @@ public class Class implements Serializable{
 	private Subject subject;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_subject_student",
-				joinColumns = @JoinColumn(name = "subject_id"), 
+	@JoinTable(name = "tb_class_student",
+				joinColumns = @JoinColumn(name = "class_id"), 
 				inverseJoinColumns = @JoinColumn(name = "student_id"))
 	private Set<User> students = new HashSet<>();
 	

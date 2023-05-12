@@ -128,15 +128,15 @@ public class UserService implements UserDetailsService {
 			entity.getRoles().add(role);
 		}
 		
-		for (CourseDTO courseDto : dto.getCourses()) {
-			Course course = courseRepository.getOne(courseDto.getId());
+		for (Long courseIdDto : dto.getCoursesId()) {
+			Course course = courseRepository.getOne(courseIdDto);
 			entity.getCourses().add(course);
 		}
 		
-		for (ClassDTO classDto : dto.getClasses()) {
-			com.projects.University.entities.Class c = classRepository.getOne(classDto.getId());
-			entity.getClasses().add(c);
-		}
+		//for (ClassDTO classDto : dto.getClasses()) {
+			//com.projects.University.entities.Class c = classRepository.getOne(classDto.getId());
+			//entity.getClasses().add(c);
+		//}
 
 	}
 
