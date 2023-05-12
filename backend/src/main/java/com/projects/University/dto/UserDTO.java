@@ -28,7 +28,7 @@ public class UserDTO implements Serializable {
 	
 	private List<Long> coursesId = new ArrayList<>();
 	
-	//private List<ClassDTO> classes = new ArrayList<>();
+	private List<Long> classesId = new ArrayList<>();
 	  
 	public UserDTO() {}
 
@@ -49,7 +49,7 @@ public class UserDTO implements Serializable {
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
 		entity.getCourses().forEach(c -> this.coursesId.add(c.getId()));
-		//entity.getClasses().forEach(cla -> this.classes.add(new ClassDTO(cla)));
+		entity.getClasses().forEach(c -> this.classesId.add(c.getId()));
 	}
 
 
@@ -97,9 +97,9 @@ public class UserDTO implements Serializable {
 		return coursesId;
 	}
 
-	//public List<ClassDTO> getClasses() {
-		//return classes;
-	//}
+	public List<Long> getClassesId() {
+		return classesId;
+	}
 
 
 	@Override

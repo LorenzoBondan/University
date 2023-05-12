@@ -38,5 +38,6 @@ INSERT INTO tb_course_subject (course_id, subject_id) VALUES (2,3);
 INSERT INTO tb_course_subject (course_id, subject_id) VALUES (2,4);
 
 INSERT INTO tb_class_student (class_id, student_id) VALUES (1,1);
+INSERT INTO tb_class_student (class_id, student_id) VALUES (3,1);
 
 
