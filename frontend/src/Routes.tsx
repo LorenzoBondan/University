@@ -1,5 +1,6 @@
 import About from "components/About";
 import Banner from "components/Banner";
+import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
@@ -21,6 +22,7 @@ const Routes = () => {
                 
             </Switch>
 
+            <Footer/>
         </Router>
     );
 }
