@@ -40,9 +40,17 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
 }
 
+.subjects-top-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .subjects-container h2{
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .subject{
@@ -52,11 +60,11 @@
     flex-direction: column;
     width: 100%;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
 .subject h4{
-    border-bottom: 1px solid white;
+    
     padding-bottom: 5px;
     flex-wrap: wrap;
     color:rgb(100, 100, 100);
@@ -71,6 +79,15 @@
 .subject-bottom p{
     color: black;
     font-size: 14px;
+}
+
+.subjects-top-container button{
+    border-radius: 50%;
+    border: 3px solid silver;
+}
+
+.subjects-top-container button svg{
+    transform: rotate(-270deg);
 }
 
 .classes-container{
@@ -105,6 +122,25 @@
 
 .classes button{
     width: 100%;
+}
+
+.subject-properties{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+}
+
+.subject-properties button{
+    border-radius: 50% !important;
+    border: 3px solid silver;
+    height: 30px;
+    width: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.subject-properties img{
+    height: 30px;
 }
 
 @media(min-width:1200px){
