@@ -2,6 +2,7 @@ import About from "components/About";
 import Banner from "components/Banner";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
+import Courses from "pages/Courses";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import history from "util/history";
@@ -17,6 +18,10 @@ const Routes = () => {
                 <Route path="/" exact>
                     <Banner/>
                     <About/>
+                </Route>
+
+                <Route path="/courses" exact>
+                    <Courses/>
                 </Route>
 
                 
