@@ -13,6 +13,7 @@ public class CourseDTO implements Serializable{
 
 	private Long id;
 	private String name;
+	private String description;
 	private String imgUrl;
 	
 	private List<SubjectDTO> subjects = new ArrayList<>();
@@ -20,17 +21,19 @@ public class CourseDTO implements Serializable{
 	
 	public CourseDTO() {}
 
-	public CourseDTO(Long id, String name, String imgUrl) {
+	public CourseDTO(Long id, String name, String imgUrl, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.imgUrl = imgUrl;
+		this.description = description;
 	}
 	
 	public CourseDTO(Course entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.imgUrl = entity.getImgUrl();
+		this.description = entity.getDescription();
 		
 		entity.getSubjects().forEach(s -> this.subjects.add(new SubjectDTO(s)));
 		entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
@@ -50,6 +53,14 @@ public class CourseDTO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getImgUrl() {

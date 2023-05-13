@@ -14,6 +14,7 @@ export type Course = {
     id: number;
     name: string;
     imgUrl: string;
+    description: string;
     subjects: Subject[];
 }
 

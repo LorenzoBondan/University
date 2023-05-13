@@ -27,6 +27,8 @@ public class Course implements Serializable{
 	private Long id;
 	private String name;
 	@Column(columnDefinition = "TEXT")
+	private String description;
+	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -41,11 +43,12 @@ public class Course implements Serializable{
 	
 	public Course() {}
 
-	public Course(Long id, String name, String imgUrl) {
+	public Course(Long id, String name, String imgUrl, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.imgUrl = imgUrl;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -70,6 +73,14 @@ public class Course implements Serializable{
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Set<Subject> getSubjects() {

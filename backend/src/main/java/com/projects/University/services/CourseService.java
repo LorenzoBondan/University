@@ -73,6 +73,7 @@ public class CourseService {
 	private void copyDtoToEntity(CourseDTO dto, Course entity) {
 		entity.setName(dto.getName());
 		entity.setImgUrl(dto.getImgUrl());
+		entity.setDescription(dto.getDescription());
 		
 		entity.getSubjects().clear();
 

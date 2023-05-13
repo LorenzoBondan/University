@@ -55,6 +55,7 @@ const CourseDetails = () => {
             <div className='course-details-card'>
                 <div className='course-details-info-container'>
                     <p>{course?.name}</p>
+                    <span>{course?.description}</span>
                     <button className='btn btn-primary'>Subscribe</button>
                 </div>
 
@@ -72,7 +73,6 @@ const CourseDetails = () => {
                     </button>
                 </div>
 
-
                     {showSelect && course?.subjects.sort((a,b) => a.semester > b.semester ? 1 : -1).map(subject => (
 
                         <div className='subject' key={subject.id}>
@@ -84,10 +84,6 @@ const CourseDetails = () => {
                             <div className='subject-bottom'>
                                 <p>{subject.semester}th Semester</p>
                             </div>
-
-                                
-
-
 
                             {showClasses && 
 
