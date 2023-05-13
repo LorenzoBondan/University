@@ -96,11 +96,13 @@ public class CourseService {
 			Course entity = repository.getOne(courseId);
 			User user = userRepository.getOne(userId);
 			
-			entity.getUsers().add(user);
-			user.getCourses().add(entity);
-			
-			entity = repository.save(entity);
-			user = userRepository.save(user);
+			if(!user.getCourses().contains(entity)) {
+				entity.getUsers().add(user);
+				user.getCourses().add(entity);
+				
+				entity = repository.save(entity);
+				user = userRepository.save(user);
+			}
 			
 			return new CourseDTO(entity);
 		}
@@ -115,11 +117,13 @@ public class CourseService {
 			Course entity = repository.getOne(courseId);
 			User user = userRepository.getOne(userId);
 			
-			entity.getUsers().remove(user);
-			user.getCourses().remove(entity);
-			
-			entity = repository.save(entity);
-			user = userRepository.save(user);
+			if(user.getCourses().contains(entity)) {
+				entity.getUsers().remove(user);
+				user.getCourses().remove(entity);
+				
+				entity = repository.save(entity);
+				user = userRepository.save(user);
+			}
 			
 			return new CourseDTO(entity);
 		}

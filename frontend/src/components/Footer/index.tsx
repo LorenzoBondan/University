@@ -30,7 +30,8 @@ function Footer() {
                 Developed By
               </h6>
               <h5>Lorenzo Bondan</h5>
-              <p>Software Engineer</p>
+              <p style={{marginBottom:"0px"}}>Software Engineer</p>
+              <p>Mechanical Engineer</p>
             </MDBCol>
 
             <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-1">
