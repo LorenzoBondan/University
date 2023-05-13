@@ -2,6 +2,7 @@ import About from "components/About";
 import Banner from "components/Banner";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
+import CourseDetails from "pages/CourseDetails";
 import Courses from "pages/Courses";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
@@ -24,7 +25,10 @@ const Routes = () => {
                     <Courses/>
                 </Route>
 
-                
+                <Route path="/courses/:courseId">
+                    <CourseDetails/>
+                </Route>
+
             </Switch>
 
             <Footer/>
