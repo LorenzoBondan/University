@@ -1,12 +1,14 @@
 
 import { useParams } from 'react-router-dom';
 import './styles.css';
-import { useEffect, useState } from 'react';
-import { Course } from 'types';
-import axios from 'axios';
-import { BASE_URL } from 'util/requests';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Course, User } from 'types';
+import axios, { AxiosRequestConfig } from 'axios';
+import { BASE_URL, requestBackend } from 'util/requests';
 import { ReactComponent as Arrow} from 'assets/images/arrow.svg';
 import Plus from 'assets/images/plus.png';
+import { AuthContext } from 'AuthContext';
+import { getTokenData, isAuthenticated } from 'util/auth';
 
 type UrlParams = {
     courseId: string;
@@ -49,6 +51,61 @@ const CourseDetails = () => {
         }
     }
 
+    // user
+
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
+
+        useEffect(() => {
+            if(isAuthenticated()){
+              setAuthContextData({
+                authenticated: true,
+                tokenData: getTokenData()
+              })
+            }
+            else{
+              setAuthContextData({
+                authenticated: false,
+              })
+            }
+          }, [setAuthContextData]);
+
+          let email: string;
+
+          authContextData.authenticated && (
+             authContextData.tokenData?.user_name && (
+             email = authContextData.tokenData?.user_name )) //
+    
+    const [userPage, setUserPage] = useState<User>();
+        
+    const subscribeInCourse = (courseId : number | undefined) => {
+
+        // buscar usuario
+        
+        const userParams : AxiosRequestConfig = {
+            method:"GET",
+            url: `/users/email/${email}`,
+            withCredentials:true
+            }
+    
+            requestBackend(userParams) 
+                .then(response => {
+                    setUserPage(response.data);
+                })
+
+        // registrar no curso
+
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/courses/registerInCourse/${courseId}/${userPage?.id}`,
+            withCredentials: true
+          }
+      
+          requestBackend(params) 
+            .then(response => {
+              console.log("registered: ", response.data)
+            })
+    }
+        
 
     return(
         <div className='course-details-container'>
@@ -56,7 +113,7 @@ const CourseDetails = () => {
                 <div className='course-details-info-container'>
                     <p>{course?.name}</p>
                     <span>{course?.description}</span>
-                    <button className='btn btn-primary'>Subscribe</button>
+                    <button className='btn btn-primary' onClick={() => subscribeInCourse(course?.id)}>Subscribe</button>
                 </div>
 
                 <div className='course-details-img-container'>
