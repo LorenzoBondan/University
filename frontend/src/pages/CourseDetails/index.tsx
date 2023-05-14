@@ -72,7 +72,7 @@ const CourseDetails = () => {
         
                 requestBackend(userParams) 
                     .then(response => {
-                        setUserPage(response.data);
+                        setUserPage(response.data);  
                 })
         }
         else{
@@ -86,9 +86,10 @@ const CourseDetails = () => {
         authContextData.tokenData?.user_name && (
         email = authContextData.tokenData?.user_name)
     ) //
+
     
     
-    const subscribeInCourse = (courseId : number | undefined) => {
+    const subscribeInCourse = (courseId : number) => {
 
         const params : AxiosRequestConfig = {
             method:"PUT",
@@ -99,9 +100,62 @@ const CourseDetails = () => {
           requestBackend(params) 
             .then(response => {
               console.log("registered: ", response.data)
+              
+              course && setSubscribes([...subscribes, course]);
+              setSubscribedToCourse(true);
             })
     }
-        
+
+    const unsubscribeInCourse = (courseId : number | undefined) => {
+
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/courses/unregisterInCourse/${courseId}/${userPage?.id}`,
+            withCredentials: true
+          }
+      
+          requestBackend(params) 
+            .then(response => {
+              console.log("unregistered: ", response.data)
+              setSubscribedToCourse(false);
+            })
+    }
+
+    const subscribeInClass = (classId : number) => {
+
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/classes/registerInClass/${classId}/${userPage?.id}`,
+            withCredentials: true
+          }
+      
+          requestBackend(params) 
+            .then(response => {
+              console.log("registered in class: ", response.data)
+              setSubscribedToClass(true);
+            })
+    }
+
+    const unsubscribeInClass = (classId : number) => {
+
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/classes/unregisterInClass/${classId}/${userPage?.id}`,
+            withCredentials: true
+          }
+      
+          requestBackend(params) 
+            .then(response => {
+              console.log("unregistered in class: ", response.data)
+              setSubscribedToClass(false);
+            })
+    }
+
+
+    // state for button 'subscribe' in course
+    const [subscribedToCourse, setSubscribedToCourse] = useState(false);
+    const [subscribedToClass, setSubscribedToClass] = useState(false);
+    const [subscribes, setSubscribes] = useState<Course[]>([]);
 
     return(
         <div className='course-details-container'>
@@ -109,7 +163,16 @@ const CourseDetails = () => {
                 <div className='course-details-info-container'>
                     <p>{course?.name}</p>
                     <span>{course?.description}</span>
-                    <button className='btn btn-primary' onClick={() => subscribeInCourse(course?.id)}>Subscribe</button>
+
+                    {isAuthenticated() && (
+                        subscribedToCourse ? (
+                            <button className='btn btn-primary' onClick={() => unsubscribeInCourse(course?.id)}>Unsubscribe</button>
+                            ) : (
+                            <button className='btn btn-primary' onClick={() => course?.id && subscribeInCourse(course?.id)}>Subscribe</button> 
+                            )   
+                        )
+                    }
+
                 </div>
 
                 <div className='course-details-img-container'>
@@ -146,7 +209,15 @@ const CourseDetails = () => {
                                         <div className='classes' key={c.id}>
                                             <h6>{subject.name} + {c.code}</h6>
                                             <p>Limit of students: {c.limitOfStudents}</p>
-                                            <button className='btn btn-primary btn-classes'>Subscribe</button>
+
+                                            {isAuthenticated() && (
+                                                subscribedToClass ? (
+                                                    <button className='btn btn-primary' onClick={() => unsubscribeInClass(c.id)}>Unsubscribe</button>
+                                                    ) : (
+                                                    <button className='btn btn-primary' onClick={() => subscribeInClass(c.id)}>Subscribe</button> 
+                                                    )   
+                                                )
+                                            }
                                         </div>
                                     ))}
                                 </div>
