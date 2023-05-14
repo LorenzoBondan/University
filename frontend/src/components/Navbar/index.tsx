@@ -5,19 +5,52 @@ import '@popperjs/core';
 import 'bootstrap/js/src/collapse';
 
 import SpringLogo from 'assets/images/spring-logo.png';
-import { hasAnyRoles } from 'util/auth';
+import { getTokenData, hasAnyRoles, isAuthenticated } from 'util/auth';
 
 import { FaGraduationCap } from 'react-icons/fa';
-import { ImBooks } from 'react-icons/im';
 import { SiGoogleclassroom} from 'react-icons/si';
 import { MdOutlineAdminPanelSettings} from 'react-icons/md';
-
+import { CgProfile } from 'react-icons/cg';
 import linkedinIcon from 'assets/images/linkedin.svg';
 import instagramIcon from 'assets/images/instagram.svg';
 import facebookIcon from 'assets/images/facebook.svg';
 import githubIcon from 'assets/images/github.svg';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from 'AuthContext';
+import { removeAuthData } from 'util/storage';
+import history from 'util/history';
 
 const Navbar = () => {
+
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
+
+    useEffect(() => {
+        if(isAuthenticated()){
+          setAuthContextData({
+            authenticated: true,
+            tokenData: getTokenData()
+          })
+        }
+        else{
+          setAuthContextData({
+            authenticated: false,
+          })
+        }
+      }, [setAuthContextData]);
+
+
+      const handleLogoutClick = (event : React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault(); 
+        
+        removeAuthData();
+    
+        setAuthContextData({
+          authenticated: false,
+        })
+    
+        history.replace('/'); 
+      }
+
     return(
         <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
             <div className='navbar-top'>
@@ -63,20 +96,6 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
-                        <li>
-                            <NavLink to="/admin/auth/login" activeClassName='active'>
-                                <ImBooks style={{marginRight:"5px"}}/>
-                                Student Login
-                            </NavLink>
-                        </li>
-
-                        <li>
-                            <NavLink to="/classes" activeClassName='active'>
-                                <SiGoogleclassroom style={{marginRight:"5px"}}/>
-                                Classes
-                            </NavLink>
-                        </li>
-
                         {hasAnyRoles(["ROLE_ADMIN"]) && (
                             <li>
                                 <NavLink to="/admin" activeClassName='active'>
@@ -85,6 +104,28 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
                         )}
+                        
+                        { authContextData.authenticated ? (
+                            <>
+                            <li>
+                                <NavLink to="/profile" activeClassName='active'>
+                                    <SiGoogleclassroom style={{marginRight:"5px"}}/>
+                                    Profile
+                                </NavLink>
+                                </li>
+                            <li>
+                                <a href="#logout" onClick={handleLogoutClick}>LOGOUT</a>
+                            </li>
+                            </>
+                        ) : (
+                            <li>
+                                <NavLink to="/admin/auth" activeClassName='active'>
+                                    <CgProfile style={{marginRight:"5px"}}/>
+                                    Student Login
+                                </NavLink>
+                            </li>
+                        )
+                        }
 
                     </ul>
                 </div>
