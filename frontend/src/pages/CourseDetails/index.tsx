@@ -1,7 +1,7 @@
 
 import { useParams } from 'react-router-dom';
 import './styles.css';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Course, User } from 'types';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL, requestBackend } from 'util/requests';
@@ -52,47 +52,43 @@ const CourseDetails = () => {
     }
 
     // user
+    let email: string;
 
     const { authContextData, setAuthContextData } = useContext(AuthContext);
-
-        useEffect(() => {
-            if(isAuthenticated()){
-              setAuthContextData({
-                authenticated: true,
-                tokenData: getTokenData()
-              })
-            }
-            else{
-              setAuthContextData({
-                authenticated: false,
-              })
-            }
-          }, [setAuthContextData]);
-
-          let email: string;
-
-          authContextData.authenticated && (
-             authContextData.tokenData?.user_name && (
-             email = authContextData.tokenData?.user_name )) //
-    
     const [userPage, setUserPage] = useState<User>();
-        
-    const subscribeInCourse = (courseId : number | undefined) => {
 
-        // buscar usuario
+    useEffect(() => {
+        if(isAuthenticated()){
+            setAuthContextData({
+            authenticated: true,
+            tokenData: getTokenData(),
+            })
+
+            const userParams : AxiosRequestConfig = {
+                method:"GET",
+                url: `/users/email/${email}`,
+                withCredentials:true
+                }
         
-        const userParams : AxiosRequestConfig = {
-            method:"GET",
-            url: `/users/email/${email}`,
-            withCredentials:true
-            }
-    
-            requestBackend(userParams) 
-                .then(response => {
-                    setUserPage(response.data);
+                requestBackend(userParams) 
+                    .then(response => {
+                        setUserPage(response.data);
                 })
-
-        // registrar no curso
+        }
+        else{
+            setAuthContextData({
+            authenticated: false,
+            })
+        }
+        }, [authContextData.tokenData?.user_name, setAuthContextData]);
+    
+    authContextData.authenticated && (
+        authContextData.tokenData?.user_name && (
+        email = authContextData.tokenData?.user_name)
+    ) //
+    
+    
+    const subscribeInCourse = (courseId : number | undefined) => {
 
         const params : AxiosRequestConfig = {
             method:"PUT",

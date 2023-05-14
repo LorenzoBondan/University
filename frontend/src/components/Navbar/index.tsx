@@ -64,9 +64,9 @@ const Navbar = () => {
                         </li>
 
                         <li>
-                            <NavLink to="/subjects" activeClassName='active'>
+                            <NavLink to="/admin/auth/login" activeClassName='active'>
                                 <ImBooks style={{marginRight:"5px"}}/>
-                                Subjects
+                                Student Login
                             </NavLink>
                         </li>
 
