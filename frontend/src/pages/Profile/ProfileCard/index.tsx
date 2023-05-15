@@ -4,7 +4,7 @@ import { AxiosRequestConfig } from 'axios';
 import { BASE_URL, requestBackend } from 'util/requests';
 
 import './styles.css';
-import { Course, User } from 'types';
+import { Class, Course, User } from 'types';
 
 
 type Props ={
@@ -30,9 +30,9 @@ const ProfileCard = ({userEmail} : Props) => {
       useEffect(() => {
         getUser();
       }, [getUser]);
-      //
 
 
+    // courses
 
     const [courses, setCourses] = useState<Course[]>([]);
 
@@ -51,6 +51,25 @@ const ProfileCard = ({userEmail} : Props) => {
   }, [page]);
 
 
+  // classes
+
+  const [classes, setClasses] = useState<Class[]>([]);
+
+  useEffect(() => {
+  async function fetchClasses() {
+    if (page && page.classesId.length > 0) {
+      const promises = page.classesId.map(classId =>
+        fetch(`${BASE_URL}/classes/${classId}`).then(res => res.json())
+      );
+      const classData = await Promise.all(promises);
+      setClasses(classData);
+    }
+  }
+
+  fetchClasses();
+    }, [page]);
+
+
     return(
         <div className='profile-card-container base-card'>
             <div className='profile-card-content-container'>
@@ -67,12 +86,12 @@ const ProfileCard = ({userEmail} : Props) => {
                 </div>
             )}
 
-            {page?.classesId && (
+            {classes && (
                 <div className='profile-card-team-container'>
                     <h2>Classes</h2>
-                    {page?.classesId.map(c => (
-                        <p key={c}>{c} + {c}</p>
-                    ))}
+                    {classes.map(c => 
+                        <p>{c.code}</p>
+                    )}
                 </div>
             )}
 
