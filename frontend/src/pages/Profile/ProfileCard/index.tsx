@@ -69,12 +69,15 @@ const ProfileCard = ({userEmail} : Props) => {
   fetchClasses();
     }, [page]);
 
-
     return(
-        <div className='profile-card-container base-card'>
+        <div className='profile-card-container'>
+            <div className='profile-card-image-container'>
+                <img src={page?.imgUrl} alt="" />
+            </div>
+
             <div className='profile-card-content-container'>
                 <h1>{page?.name}</h1>
-                <h4>Email: {page?.email}</h4>
+                <h4>{page?.email}</h4>
             </div>
 
             {courses && (
@@ -90,7 +93,7 @@ const ProfileCard = ({userEmail} : Props) => {
                 <div className='profile-card-team-container'>
                     <h2>Classes</h2>
                     {classes.map(c => 
-                        <p>{c.code}</p>
+                        <p> + {c.code}</p>
                     )}
                 </div>
             )}

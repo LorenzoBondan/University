@@ -1,6 +1,32 @@
+.profile-card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 30px;
+    background-color: #fff;
+    width: 350px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.profile-card-image-container{
+    padding-bottom: 10px;
+    border-bottom: 2px solid silver;
+}
+
+.profile-card-image-container img{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 1px solid silver;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
 .profile-card-content-container{
     padding: 20px;
-    text-shadow: 5px 5px 5px black;
+
 }
 
 .profile-card-team-container{
@@ -8,27 +34,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-shadow: 5px 5px 5px black;
 }
 
 .profile-card-team-container h2{
     color: #96FC58;
 }
 
-.profile-card-team-container img{
-    height: 300px;
-    margin-bottom: 20px;
-}
-
-.profile-card-team-container button{
-    width: 300px;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 2px black;
-    color: white;
-    letter-spacing: 0.04rem;
-}
-
-.profile-card-team-container select{
-    width: 300px;
-    margin-bottom: 15px;
-}
