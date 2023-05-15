@@ -41,8 +41,8 @@ export type User = {
     password: string;
     imgUrl: string;
     roles : Role[];
-    classes: Class[];
-    courses: Course[];
+    classesId: number[];
+    coursesId: number[];
 }
 
 export type Role = {

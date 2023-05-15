@@ -5,6 +5,7 @@ import Navbar from "components/Navbar";
 import Auth from "pages/Admin/Auth";
 import CourseDetails from "pages/CourseDetails";
 import Courses from "pages/Courses";
+import Profile from "pages/Profile";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import history from "util/history";
@@ -33,6 +34,10 @@ const Routes = () => {
                 <Redirect from='/admin/auth' to='/admin/auth/login' exact />
                 <Route path="/admin/auth">
                     <Auth />
+                </Route>
+
+                <Route path="/profile">
+                    <Profile />
                 </Route>
 
             </Switch>

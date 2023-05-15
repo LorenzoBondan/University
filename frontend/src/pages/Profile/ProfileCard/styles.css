@@ -1,0 +1,34 @@
+.profile-card-content-container{
+    padding: 20px;
+    text-shadow: 5px 5px 5px black;
+}
+
+.profile-card-team-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-shadow: 5px 5px 5px black;
+}
+
+.profile-card-team-container h2{
+    color: #96FC58;
+}
+
+.profile-card-team-container img{
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.profile-card-team-container button{
+    width: 300px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 2px black;
+    color: white;
+    letter-spacing: 0.04rem;
+}
+
+.profile-card-team-container select{
+    width: 300px;
+    margin-bottom: 15px;
+}
