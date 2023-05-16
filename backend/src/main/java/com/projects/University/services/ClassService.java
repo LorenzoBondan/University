@@ -88,7 +88,7 @@ public class ClassService {
 			Class entity = repository.getOne(classId);
 			User user = userRepository.getOne(userId);
 			
-			if(entity.getLimitOfStudents() < entity.getStudents().size()) {
+			if(entity.getLimitOfStudents() > entity.getStudents().size()) {
 				entity.getStudents().add(user);
 				user.getClasses().add(entity);
 				
