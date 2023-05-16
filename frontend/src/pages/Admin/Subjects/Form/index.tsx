@@ -120,6 +120,7 @@ const Form = () => {
                             </div>
 
                             <div className='margin-bottom-30'>
+                                <label htmlFor="" style={{color:"white"}}>Courses</label>  
                                 <Controller 
                                     name = 'courses'
                                     rules = {{required: true}}
@@ -142,9 +143,10 @@ const Form = () => {
                             </div>
 
                             <div className='margin-bottom-30'>
+                                <label htmlFor="" style={{color:"white"}}>Classes</label>  
                                 <Controller 
                                     name = 'classes'
-                                    rules = {{required: true}}
+                                    rules = {{required: false}}
                                     control = {control}
                                     render = {( {field} ) => (
                                         <Select 

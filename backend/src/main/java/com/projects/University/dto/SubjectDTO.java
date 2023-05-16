@@ -16,6 +16,7 @@ public class SubjectDTO implements Serializable{
 	private Integer semester;
 	
 	private List<ClassDTO> classes = new ArrayList<>();
+	private List<Long> coursesId = new ArrayList<>();
 	
 	public SubjectDTO() {}
 
@@ -32,6 +33,7 @@ public class SubjectDTO implements Serializable{
 		this.semester = entity.getSemester();
 		
 		entity.getClasses().forEach(c -> this.classes.add(new ClassDTO(c)));
+		entity.getCourses().forEach(c -> this.coursesId.add(c.getId()));
 	}
 
 	public Long getId() {
@@ -62,6 +64,9 @@ public class SubjectDTO implements Serializable{
 		return classes;
 	}
 
+	public List<Long> getCoursesId() {
+		return coursesId;
+	}
 
 	@Override
 	public int hashCode() {

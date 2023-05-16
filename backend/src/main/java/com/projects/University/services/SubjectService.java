@@ -15,8 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projects.University.dto.ClassDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.entities.Class;
+import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
 import com.projects.University.repositories.ClassRepository;
+import com.projects.University.repositories.CourseRepository;
 import com.projects.University.repositories.SubjectRepository;
 import com.projects.University.services.exceptions.DataBaseException;
 import com.projects.University.services.exceptions.ResourceNotFoundException;
@@ -29,6 +31,9 @@ public class SubjectService {
 	
 	@Autowired
 	private ClassRepository classRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 	
 
 	@Transactional(readOnly = true)
@@ -77,6 +82,11 @@ public class SubjectService {
 		for (ClassDTO classDto : dto.getClasses()) {
 			Class c = classRepository.getOne(classDto.getId());
 			entity.getClasses().add(c);
+		}
+		
+		for (Long courseId : dto.getCoursesId()) {
+			Course c = courseRepository.getOne(courseId);
+			entity.getCourses().add(c);
 		}
 		
 		

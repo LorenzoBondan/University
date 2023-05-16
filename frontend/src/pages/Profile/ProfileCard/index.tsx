@@ -93,7 +93,7 @@ const ProfileCard = ({userEmail} : Props) => {
                 <div className='profile-card-courses-container'>
                     <h2>Classes</h2>
                     {classes.map(c => 
-                        <p> + {c.code}</p>
+                        <p key={c.id}> + {c.code}</p>
                     )}
                 </div>
             )}
