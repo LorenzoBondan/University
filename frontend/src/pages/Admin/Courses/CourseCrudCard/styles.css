@@ -1,0 +1,16 @@
+.player-crud-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.player-crud-card-top-container{
+    margin-bottom: 10px;
+}
+
+.player-crud-card-top-container img{
+    height: 30px;
+}

@@ -52,7 +52,7 @@ const Navbar = () => {
       }
 
     return(
-        <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
+        <nav className="navbar navbar-dark bg-primary main-nav">
             <div className='navbar-top'>
                 <div className='navbar-top-logo'>
                     <Link to="/" className="nav-logo-text color-primary">
@@ -72,9 +72,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            
-
-            <div className='navbar-bottom'>
+            <div className='navbar-bottom navbar-expand-md'>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -84,7 +82,7 @@ const Navbar = () => {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                <span className='navbar-toggler-icon'></span>
+                <span className='navbar-toggler-icon' style={{height:"10px"}}></span>
                 </button>
 
                 <div className="collapse navbar-collapse" id="university-navbar">

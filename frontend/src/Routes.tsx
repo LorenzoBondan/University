@@ -2,6 +2,7 @@ import About from "components/About";
 import Banner from "components/Banner";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
+import Admin from "pages/Admin";
 import Auth from "pages/Admin/Auth";
 import CourseDetails from "pages/CourseDetails";
 import Courses from "pages/Courses";
@@ -34,6 +35,11 @@ const Routes = () => {
                 <Redirect from='/admin/auth' to='/admin/auth/login' exact />
                 <Route path="/admin/auth">
                     <Auth />
+                </Route>
+
+                <Redirect from="/admin" to="/admin/courses" exact />
+                <Route path="/admin">
+                    <Admin />
                 </Route>
 
                 <Route path="/profile">
