@@ -56,6 +56,18 @@ public class CourseService {
 		entity = repository.save(entity);
 		return new CourseDTO(entity);
 	}
+	
+	@Transactional
+	public CourseDTO update(Long id, CourseDTO dto) {
+		try {
+			Course entity = repository.getOne(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new CourseDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
 
 
 	public void delete(Long id) {

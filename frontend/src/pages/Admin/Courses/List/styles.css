@@ -1,4 +1,4 @@
-.players-crud-container{
+.courses-crud-container{
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -15,5 +15,5 @@
 .course-crud-column{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center ;
 }

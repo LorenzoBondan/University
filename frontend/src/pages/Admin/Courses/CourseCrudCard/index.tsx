@@ -11,20 +11,20 @@ function CourseCrudCard( {course} : Props ) {
 
     return (
       <>
-        <div className='base-card player-crud-card'>
+        <div className='base-card course-crud-card'>
 
-            <div className='player-crud-card-top-container'>
+            <div className='course-crud-card-top-container'>
                 <img src={course.imgUrl} alt="" />
             </div>
 
-            <div className='player-crud-card-bottom-container'>
+            <div className='course-crud-card-bottom-container'>
               <h3>{course.name}</h3>
             </div>
 
-            <div className='player-crud-card-buttons-container'>
+            <div className='course-crud-card-buttons-container'>
 
-                <Link to={`/admin/courses/${course.id}`}>
-                  <button className='btn btn-outline-secondary player-crud-card-button'>
+                <Link to={`/admin/courses/${course.id}`} className='course-crud-card-buttons-container'>
+                  <button className='btn btn-outline-secondary'>
                     EDIT
                   </button>
                 </Link>

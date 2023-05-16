@@ -35,7 +35,7 @@ const List = () => {
 
 
   return (
-    <div className='players-crud-container'>
+    <div className='courses-crud-container'>
       <Link to="/admin/courses/create">
           <button className="btn btn-primary btn-crud-add">
             ADD NEW COURSE

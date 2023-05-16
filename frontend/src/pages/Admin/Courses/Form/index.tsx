@@ -39,7 +39,7 @@ const Form = () => {
         // data: formData
         const params : AxiosRequestConfig = {
             method: isEditing? "PUT" : "POST",
-            url: isEditing? `/course/${courseId}` : "/course",
+            url: isEditing? `/courses/${courseId}` : "/courses",
             data: formData,
             withCredentials: true
           };
@@ -63,13 +63,13 @@ const Form = () => {
 
     
     return(
-        <div className="players-crud-container">
-            <div className="base-card players-card-form-card">
+        <div className="courses-crud-container">
+            <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT COURSE</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='row players-crud-inputs-container'>
-                        <div className='col-lg-6 players-crud-inputs-left-container'>
+                    <div className='row courses-crud-inputs-container'>
+                        <div className='col-lg-6 courses-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label>  
@@ -111,7 +111,7 @@ const Form = () => {
                                     })}
                                     type="text"
                                     className={`form-control base-input ${errors.imgUrl ? 'is-invalid' : ''}`}
-                                    placeholder="URL of Player's image"
+                                    placeholder="URL of course's image"
                                     name="imgUrl"
                                 />
                                 <div className='invalid-feedback d-block'>{errors.imgUrl?.message}</div>
@@ -120,15 +120,15 @@ const Form = () => {
                         </div>
                     </div>
 
-                    <div className='players-crud-buttons-container'>
+                    <div className='courses-crud-buttons-container'>
                         <button 
-                            className='btn btn-outline-danger players-crud-buttons'
+                            className='btn btn-outline-danger courses-crud-buttons'
                             onClick={handleCancel}
                             >
                             CANCEL
                         </button>
 
-                        <button className='btn btn-primary text-white players-crud-buttons'>SAVE</button>
+                        <button className='btn btn-primary text-white courses-crud-buttons'>SAVE</button>
                     </div>
                 </form>
             </div>

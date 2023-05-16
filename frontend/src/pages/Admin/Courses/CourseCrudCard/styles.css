@@ -1,4 +1,4 @@
-.player-crud-card{
+.course-crud-card{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,10 +7,28 @@
     margin-bottom: 20px;
 }
 
-.player-crud-card-top-container{
-    margin-bottom: 10px;
+.course-crud-card-top-container{
+    margin-bottom: 20px;
 }
 
-.player-crud-card-top-container img{
-    height: 30px;
+.course-crud-card-top-container img{
+    height: 80px;
+}
+
+.course-crud-card-bottom-container h3{
+    font-size: 20px;
+    color: white;
+}
+
+.course-crud-card-buttons-container{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-crud-card-buttons-container button{
+    width: 100%;
+    background-color: aquamarine;
 }
