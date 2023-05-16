@@ -81,7 +81,7 @@ const ProfileCard = ({userEmail} : Props) => {
             </div>
 
             {courses && (
-                <div className='profile-card-team-container'>
+                <div className='profile-card-courses-container'>
                     <h2>Courses</h2>
                     {courses.map(c => (
                         <p key={c.id}>{c.name}</p>
@@ -90,7 +90,7 @@ const ProfileCard = ({userEmail} : Props) => {
             )}
 
             {classes && (
-                <div className='profile-card-team-container'>
+                <div className='profile-card-courses-container'>
                     <h2>Classes</h2>
                     {classes.map(c => 
                         <p> + {c.code}</p>
