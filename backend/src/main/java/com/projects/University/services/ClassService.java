@@ -88,11 +88,14 @@ public class ClassService {
 			Class entity = repository.getOne(classId);
 			User user = userRepository.getOne(userId);
 			
-			entity.getStudents().add(user);
-			user.getClasses().add(entity);
+			if(entity.getLimitOfStudents() < entity.getStudents().size()) {
+				entity.getStudents().add(user);
+				user.getClasses().add(entity);
+				
+				entity = repository.save(entity);
+				user = userRepository.save(user);
+			}
 			
-			entity = repository.save(entity);
-			user = userRepository.save(user);
 			return new ClassDTO(entity);
 		}
 		catch (EntityNotFoundException e) {
