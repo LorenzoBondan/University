@@ -34,13 +34,13 @@ INSERT INTO tb_subject (name, semester) VALUES ('Anatomy', 2);
 INSERT INTO tb_subject (name, semester) VALUES ('Business Intelligence', 4);
 
 
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('A', 10, 1);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('B', 20, 1);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('C', 30, 2);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('D', 40, 3);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('E', 50, 4);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('F', 50, 5);
-INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('G', 50, 6);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('ABC', 10, 1);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('BCD', 20, 1);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('CDE', 30, 2);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('DEF', 40, 3);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('EFG', 50, 4);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('FGH', 50, 5);
+INSERT INTO tb_class (code, limit_Of_Students, subject_id) VALUES ('GHI', 50, 6);
 
 INSERT INTO tb_user_course (user_id, course_id) VALUES (1,1);
 INSERT INTO tb_user_course (user_id, course_id) VALUES (4,2);
