@@ -83,18 +83,7 @@ const Form = () => {
     }
 
     const coursesIds = selectCourses?.map(course => course.id)
-
-    const [selectCourseId, setSelectCourseId] = useState<Course>();
-    
-    const getCourseById = (id : number) => {
-        requestBackend({url: `/courses/${id}`})
-            .then(response => {
-                setSelectCourseId(response.data)
-            })
-        return selectCourseId?.name;
-    }
-
-    
+    const coursesNames = selectCourses?.map(course => course.name);
 
     return(
         <div className="subjects-crud-container">
@@ -144,7 +133,7 @@ const Form = () => {
                                     name="coursesId"
                                     multiple
                                     >
-                                    {coursesIds?.sort((a,b) => a > b ? 1 : -1).map(id => <option key={id} value={id}>{id}</option>)}
+                                    {coursesIds?.map(id => <option key={id} value={id}>{coursesNames && coursesNames[id - 1]}</option>)}
                                 </select>
                             </div>
 
@@ -170,6 +159,7 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                             </div>
+
                         </div>
                     </div>
 

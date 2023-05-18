@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -58,6 +60,18 @@ public class SubjectService {
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new SubjectDTO(entity);
+	}
+	
+	@Transactional
+	public SubjectDTO update(Long id, SubjectDTO dto) {
+		try {
+			Subject entity = repository.getOne(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new SubjectDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
 
