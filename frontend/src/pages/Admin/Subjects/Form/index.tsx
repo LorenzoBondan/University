@@ -82,9 +82,6 @@ const Form = () => {
         history.push("/admin/subjects")
     }
 
-    const coursesIds = selectCourses?.map(course => course.id)
-    const coursesNames = selectCourses?.map(course => course.name);
-
     return(
         <div className="subjects-crud-container">
             <div className="base-card subjects-card-form-card">

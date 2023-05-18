@@ -1,7 +1,5 @@
 package com.projects.University.services;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -40,12 +38,9 @@ public class SubjectService {
 	
 
 	@Transactional(readOnly = true)
-	public Page<SubjectDTO> findAllPaged(Long classId, Pageable pageable) {
-		List<Class> classes = (classId == 0) ? null :
-	 		Arrays.asList(classRepository.getOne(classId));
-	 	Page<Subject> page = repository.find(classes, pageable);
-	 	repository.findSubjectsWithClasses(page.getContent()); 
-	 	return page.map(x -> new SubjectDTO(x));
+	public Page<SubjectDTO> findAllPaged(Pageable pageable) {
+		Page<Subject> list = repository.findAll(pageable);
+		return list.map(x -> new SubjectDTO(x));
 	}
 
 	@Transactional(readOnly = true)
@@ -98,6 +93,8 @@ public class SubjectService {
 			Class c = classRepository.getOne(classDto.getId());
 			entity.getClasses().add(c);
 		}
+		
+		entity.getCourses().clear();
 		
 		for (CourseDTO courseDto : dto.getCourses()) {
 			Course c = courseRepository.getOne(courseDto.getId());

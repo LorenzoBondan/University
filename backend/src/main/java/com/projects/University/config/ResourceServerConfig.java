@@ -57,11 +57,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(PUBLIC).permitAll() 
 		.antMatchers(HttpMethod.GET, TEACHER_OR_ADMIN).permitAll() 
 		.antMatchers(HttpMethod.PUT, TEACHER_OR_ADMIN).permitAll() 
+		.antMatchers(HttpMethod.POST, TEACHER_OR_ADMIN).permitAll() 
+		.antMatchers(HttpMethod.DELETE, TEACHER_OR_ADMIN).permitAll() 
 		.antMatchers(HttpMethod.POST, REGISTER).permitAll()
 		.antMatchers(HttpMethod.GET, REGISTER).permitAll() // User info
 		.antMatchers(HttpMethod.PUT, REGISTER).permitAll() // User info
 		.antMatchers(HttpMethod.DELETE, TEACHER_OR_ADMIN).permitAll()
-		.antMatchers(TEACHER_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN") 
+		.antMatchers(TEACHER_OR_ADMIN).hasAnyRole("TEACHER", "ADMIN") 
 		.antMatchers(ADMIN).hasRole("ADMIN") 
 		.anyRequest().authenticated();
 		
