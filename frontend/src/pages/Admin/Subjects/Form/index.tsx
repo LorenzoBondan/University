@@ -46,7 +46,7 @@ const Form = () => {
                     setValue('name', subject.name);
                     setValue('semester', subject.semester);
 
-                    setValue('courses', subject.courses);
+                    setValue('coursesId', subject.coursesId);
                     setValue('classes', subject.classes);
 
                 })
@@ -81,6 +81,20 @@ const Form = () => {
     const handleCancel = () => {
         history.push("/admin/subjects")
     }
+
+    const coursesIds = selectCourses?.map(course => course.id)
+
+    const [selectCourseId, setSelectCourseId] = useState<Course>();
+    
+    const getCourseById = (id : number) => {
+        requestBackend({url: `/courses/${id}`})
+            .then(response => {
+                setSelectCourseId(response.data)
+            })
+        return selectCourseId?.name;
+    }
+
+    
 
     return(
         <div className="subjects-crud-container">
@@ -120,26 +134,18 @@ const Form = () => {
                             </div>
 
                             <div className='margin-bottom-30'>
-                                <label htmlFor="" style={{color:"white"}}>Courses</label>  
-                                <Controller 
-                                    name = 'courses'
-                                    rules = {{required: true}}
-                                    control = {control}
-                                    render = {( {field} ) => (
-                                        <Select 
-                                            {...field}
-                                            options={selectCourses?.sort((a,b) => a.name > b.name ? 1 : -1)}
-                                            classNamePrefix="courses-crud-select"
-                                            placeholder="Courses"
-                                            isMulti
-                                            getOptionLabel={(course: Course) => course.name}
-                                            getOptionValue={(course: Course) => course.id.toString()}
-                                        />    
-                                    )}
-                                />
-                                {errors.courses && (
-                                    <div className='invalid-feedback d-block'>Campo obrigatório</div>
-                                )}
+                                <label htmlFor="" style={{color:"white"}}>Courses Id</label>  
+                                <select
+                                    {...register("coursesId", {
+                                        required: 'Campo obrigatório',
+                                    })}
+                                    className={`form-control base-input ${errors.coursesId ? 'is-invalid' : ''}`}
+                                    placeholder='Courses Id' 
+                                    name="coursesId"
+                                    multiple
+                                    >
+                                    {coursesIds?.sort((a,b) => a > b ? 1 : -1).map(id => <option key={id} value={id}>{id}</option>)}
+                                </select>
                             </div>
 
                             <div className='margin-bottom-30'>
