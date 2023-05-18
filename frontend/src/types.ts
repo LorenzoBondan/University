@@ -23,7 +23,7 @@ export type Subject = {
     name: string;
     semester: number;
     classes: Class[];
-    coursesId: number[];
+    courses: Course[];
 }
 
 export type Class = {

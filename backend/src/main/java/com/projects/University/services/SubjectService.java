@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.ClassDTO;
+import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.entities.Class;
 import com.projects.University.entities.Course;
@@ -98,8 +99,8 @@ public class SubjectService {
 			entity.getClasses().add(c);
 		}
 		
-		for (Long courseId : dto.getCoursesId()) {
-			Course c = courseRepository.getOne(courseId);
+		for (CourseDTO courseDto : dto.getCourses()) {
+			Course c = courseRepository.getOne(courseDto.getId());
 			entity.getCourses().add(c);
 		}
 		

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.services.SubjectService;
 
