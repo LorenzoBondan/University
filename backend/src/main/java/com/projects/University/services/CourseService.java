@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.CourseDTO;
 
-import com.projects.University.dto.UserDTO;
 import com.projects.University.entities.Course;
 import com.projects.University.entities.Subject;
 import com.projects.University.entities.User;
@@ -96,8 +95,8 @@ public class CourseService {
 		
 		entity.getUsers().clear();
 
-		for (UserDTO userDto : dto.getUsers()) {
-			User user = userRepository.getOne(userDto.getId());
+		for (Long userDto : dto.getUsersId()) {
+			User user = userRepository.getOne(userDto);
 			entity.getUsers().add(user);
 		}
 		

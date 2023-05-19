@@ -8,6 +8,7 @@ import { MdDangerous } from 'react-icons/md';
 import Courses from "./Courses";
 import Subjects from "./Subjects";
 import Classes from "./Classes";
+import Users from "./User";
 
 
 function Admin(){
@@ -35,7 +36,7 @@ function Admin(){
                             </PrivateRoute>
 
                             <PrivateRoute path="/admin/users">
-
+                                <Users/>
                             </PrivateRoute>
                         </Switch>
 

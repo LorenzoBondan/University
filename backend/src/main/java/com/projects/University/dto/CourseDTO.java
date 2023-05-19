@@ -17,7 +17,7 @@ public class CourseDTO implements Serializable{
 	private String imgUrl;
 	
 	private List<Long> subjectsId = new ArrayList<>();
-	private List<UserDTO> users = new ArrayList<>();
+	private List<Long> usersId = new ArrayList<>();
 	
 	public CourseDTO() {}
 
@@ -36,7 +36,7 @@ public class CourseDTO implements Serializable{
 		this.description = entity.getDescription();
 		
 		entity.getSubjects().forEach(s -> this.subjectsId.add(s.getId()));
-		entity.getUsers().forEach(u -> this.users.add(new UserDTO(u)));
+		entity.getUsers().forEach(u -> this.usersId.add(u.getId()));
 	}
 
 	public Long getId() {
@@ -76,8 +76,8 @@ public class CourseDTO implements Serializable{
 	}
 
 
-	public List<UserDTO> getUsers() {
-		return users;
+	public List<Long> getUsersId() {
+		return usersId;
 	}
 
 	@Override

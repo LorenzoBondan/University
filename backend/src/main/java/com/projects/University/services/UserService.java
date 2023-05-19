@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projects.University.dto.CourseDTO;
 import com.projects.University.dto.RoleDTO;
 import com.projects.University.dto.SubjectDTO;
 import com.projects.University.dto.UserDTO;
@@ -126,8 +127,8 @@ public class UserService implements UserDetailsService {
 			entity.getRoles().add(role);
 		}
 		
-		for (Long courseIdDto : dto.getCoursesId()) {
-			Course course = courseRepository.getOne(courseIdDto);
+		for (CourseDTO courseDto : dto.getCourses()) {
+			Course course = courseRepository.getOne(courseDto.getId());
 			entity.getCourses().add(course);
 		}
 		
