@@ -7,6 +7,7 @@ import { hasAnyRoles, isAuthenticated } from "util/auth";
 import { MdDangerous } from 'react-icons/md';
 import Courses from "./Courses";
 import Subjects from "./Subjects";
+import Classes from "./Classes";
 
 
 function Admin(){
@@ -30,7 +31,7 @@ function Admin(){
                             </PrivateRoute>
 
                             <PrivateRoute path="/admin/classes">
-                                
+                                <Classes/>
                             </PrivateRoute>
 
                             <PrivateRoute path="/admin/users">

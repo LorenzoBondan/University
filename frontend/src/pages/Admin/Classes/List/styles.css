@@ -1,0 +1,19 @@
+.subjects-crud-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-crud-add {
+    width: 300px;
+    margin-bottom: 20px;
+    font-size: 25px !important;
+}
+
+.subject-crud-column{
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}
