@@ -26,6 +26,7 @@ const Form = () => {
                     const user = response.data as User;
 
                     setValue('name', user.name);
+                    setValue('password', user.password);
                     setValue('email', user.email);
                     setValue('imgUrl', user.imgUrl);
 
@@ -135,6 +136,20 @@ const Form = () => {
                         </div>
 
                         <div className='margin-bottom-30'>
+                            <label htmlFor="" style={{color:"white"}}>Password</label> 
+                                <input 
+                                    {...register("password", {
+                                    })}
+                                    type="text"
+                                    className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
+                                    placeholder="Password"
+                                    name="password"
+                                />
+                                <div className='invalid-feedback d-block'>{errors.password?.message}</div>
+
+                            </div>
+
+                        <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Img Url</label>  
                                 <input 
                                     {...register("imgUrl", {
@@ -156,7 +171,7 @@ const Form = () => {
                             <label htmlFor="" style={{color:"white"}}>Courses</label> 
                                 <Controller 
                                     name = 'courses'
-                                    rules = {{required: true}}
+                                    rules = {{required: false}}
                                     control = {control}
                                     render = {( {field} ) => (
                                         <Select 
@@ -179,7 +194,7 @@ const Form = () => {
                             <label htmlFor="" style={{color:"white"}}>Classes</label> 
                                 <Controller 
                                     name = 'classes'
-                                    rules = {{required: true}}
+                                    rules = {{required: false}}
                                     control = {control}
                                     render = {( {field} ) => (
                                         <Select 
