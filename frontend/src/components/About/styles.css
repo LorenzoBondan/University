@@ -6,7 +6,7 @@
     margin: 20px 20px;
 }
 
-.row{
+.row-center{
     display: flex;
     align-items: center;
     justify-content: center;
