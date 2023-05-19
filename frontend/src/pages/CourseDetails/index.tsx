@@ -6,14 +6,13 @@ import { Course, User } from 'types';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL, requestBackend } from 'util/requests';
 import { ReactComponent as Arrow} from 'assets/images/arrow.svg';
-import Plus from 'assets/images/plus.png';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
+import SubjectCard from './SubjectCard';
 
 type UrlParams = {
     courseId: string;
 }
-
 
 const CourseDetails = () => {
 
@@ -31,23 +30,13 @@ const CourseDetails = () => {
     }, [courseId]);
 
     const [showSelect, setShowSelect] = useState(false);
-    const [showClasses, setShowClasses] = useState(false);
-
+    
     const openAndCloseSelect = () => {
         if(showSelect){
             setShowSelect(false);
         }
         else{
             setShowSelect(true);
-        }
-    }
-
-    const openAndCloseClasses = () => {
-        if(showClasses){
-            setShowClasses(false);
-        }
-        else{
-            setShowClasses(true);
         }
     }
 
@@ -88,7 +77,6 @@ const CourseDetails = () => {
     ) //
 
     
-    
     const subscribeInCourse = (courseId : number) => {
 
         const params : AxiosRequestConfig = {
@@ -121,41 +109,12 @@ const CourseDetails = () => {
             })
     }
 
-    const subscribeInClass = (classId : number) => {
-
-        const params : AxiosRequestConfig = {
-            method:"PUT",
-            url: `/classes/registerInClass/${classId}/${userPage?.id}`,
-            withCredentials: true
-          }
-      
-          requestBackend(params) 
-            .then(response => {
-              console.log("registered in class: ", response.data)
-              setSubscribedToClass(true);
-            })
-    }
-
-    const unsubscribeInClass = (classId : number) => {
-
-        const params : AxiosRequestConfig = {
-            method:"PUT",
-            url: `/classes/unregisterInClass/${classId}/${userPage?.id}`,
-            withCredentials: true
-          }
-      
-          requestBackend(params) 
-            .then(response => {
-              console.log("unregistered in class: ", response.data)
-              setSubscribedToClass(false);
-            })
-    }
-
-
     // state for button 'subscribe' in course
     const [subscribedToCourse, setSubscribedToCourse] = useState(false);
-    const [subscribedToClass, setSubscribedToClass] = useState(false);
+    
     const [subscribes, setSubscribes] = useState<Course[]>([]);
+
+    const subjectsId = course?.subjectsId;
 
     return(
         <div className='course-details-container'>
@@ -181,51 +140,19 @@ const CourseDetails = () => {
 
             </div>
 
-            <div className='subjects-container'>
-                <div className='subjects-top-container'>
+            <div className='subjects-top-container'>
+                <div className='subjects-title'>
                     <h2>Subjects</h2>
                     <button onClick={() => openAndCloseSelect()} className='btn btn-primary btn-subjects'>
                         <Arrow/>
                     </button>
                 </div>
+                
+                {showSelect && subjectsId?.map(subjectId => (
+                    <SubjectCard subjectId={subjectId} userId={userPage?.id}/>
+                ))}
+            </div>
 
-                    {showSelect && course?.subjects.sort((a,b) => a.semester > b.semester ? 1 : -1).map(subject => (
-
-                        <div className='subject' key={subject.id}>
-                            <div className='subject-properties'>
-                                <h4>{subject.name}</h4>
-                                <img src={Plus} onClick={() => openAndCloseClasses()} className='' alt=""/>
-                            </div>
-                            
-                            <div className='subject-bottom'>
-                                <p>{subject.semester}th Semester</p>
-                            </div>
-
-                            {showClasses && 
-
-                                <div className='classes-container'>
-                                    <h3>Classes</h3>
-                                    {subject.classes.map(c => (
-                                        <div className='classes' key={c.id}>
-                                            <h6>{subject.name} + {c.code}</h6>
-                                            <p>Limit of students: {c.limitOfStudents}</p>
-
-                                            {isAuthenticated() && (
-                                                subscribedToClass ? (
-                                                    <button className='btn btn-primary' onClick={() => unsubscribeInClass(c.id)}>Unsubscribe</button>
-                                                    ) : (
-                                                    <button className='btn btn-primary' onClick={() => subscribeInClass(c.id)}>Subscribe</button> 
-                                                    )   
-                                                )
-                                            }
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-
-                        </div>
-                    ))}
-                </div>
         </div>
     );
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.projects.University.entities.Subject;
 
 public class SubjectDTO implements Serializable{
@@ -16,6 +17,7 @@ public class SubjectDTO implements Serializable{
 	private Integer semester;
 	
 	private List<ClassDTO> classes = new ArrayList<>();
+	@JsonBackReference
 	private List<CourseDTO> courses = new ArrayList<>();
 	
 	public SubjectDTO() {}
