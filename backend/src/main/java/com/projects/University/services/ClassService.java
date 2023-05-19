@@ -54,6 +54,18 @@ public class ClassService {
 		entity = repository.save(entity);
 		return new ClassDTO(entity);
 	}
+	
+	@Transactional
+	public ClassDTO update(Long id, ClassDTO dto) {
+		try {
+			Class entity = repository.getOne(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new ClassDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
 
 
 	public void delete(Long id) {

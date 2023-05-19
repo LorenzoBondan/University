@@ -2,6 +2,8 @@ package com.projects.University.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,6 +51,11 @@ public class ClassResource {
 		return ResponseEntity.created(uri).body(dto);	
 	}
 	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ClassDTO> update(@PathVariable Long id, @Valid @RequestBody ClassDTO dto)	{
+		ClassDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
+	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ClassDTO> delete(@PathVariable Long id) {
