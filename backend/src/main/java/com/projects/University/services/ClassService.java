@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.University.dto.ClassDTO;
-import com.projects.University.dto.UserDTO;
 import com.projects.University.entities.Class;
 import com.projects.University.entities.User;
 import com.projects.University.repositories.ClassRepository;
@@ -87,8 +86,8 @@ public class ClassService {
 
 		entity.getStudents().clear();
 
-		for (UserDTO userDto : dto.getStudents()) {
-			User student = userRepository.getOne(userDto.getId());
+		for (Long userDto : dto.getStudentsId()) {
+			User student = userRepository.getOne(userDto);
 			entity.getStudents().add(student);
 		}
 		

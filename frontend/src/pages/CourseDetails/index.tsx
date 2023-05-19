@@ -149,7 +149,7 @@ const CourseDetails = () => {
                 </div>
                 
                 {showSelect && subjectsId?.map(subjectId => (
-                    <SubjectCard subjectId={subjectId} userId={userPage?.id}/>
+                    <SubjectCard subjectId={subjectId} userId={userPage?.id} key={subjectId}/>
                 ))}
             </div>
 

@@ -13,7 +13,7 @@ public class ClassDTO {
 	
 	private Long subjectId;
 	
-	private List<UserDTO> students = new ArrayList<>();
+	private List<Long> studentsId = new ArrayList<>();
 	
 	public ClassDTO() {}
 
@@ -31,7 +31,7 @@ public class ClassDTO {
 		this.limitOfStudents = entity.getLimitOfStudents();
 		this.subjectId = entity.getSubject().getId();
 		
-		entity.getStudents().forEach(s -> this.students.add(new UserDTO(s)));
+		entity.getStudents().forEach(s -> this.studentsId.add(s.getId()));
 	}
 
 	public Long getId() {
@@ -66,8 +66,8 @@ public class ClassDTO {
 		this.subjectId = subjectId;
 	}
 
-	public List<UserDTO> getStudents() {
-		return students;
+	public List<Long> getStudentsId() {
+		return studentsId;
 	}
 
 	@Override

@@ -4,10 +4,7 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
-
-
 import { requestBackend } from 'util/requests';
-import './styles.css';
 import { Class, Course, Role, User } from 'types';
 
 type UrlParams = {
@@ -35,8 +32,7 @@ const Form = () => {
 
                     setValue('roles', user.roles);
 
-                    coursesIds?.map(m => m);
-                    classesIds?.map(m => m);
+                    
                 })
         }
         
@@ -100,6 +96,11 @@ const Form = () => {
 
     const classesIds = selectClasses?.map(c => c.id);
 
+    useEffect(() => {
+        coursesIds?.map(m => m);
+        classesIds?.map(m => m);
+    }, [coursesIds, classesIds]);
+
     return(
         <div className="students-crud-container">
 
@@ -159,6 +160,8 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.imgUrl?.message}</div>
                         </div>
+
+                        
 
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Roles</label> 
