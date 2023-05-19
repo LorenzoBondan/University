@@ -1,10 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
-import { Class, Subject, User } from 'types';
+import { Class, Subject } from 'types';
 import { requestBackend } from 'util/requests';
-import Select from 'react-select';
 
 type UrlParams = {
     classId: string;
@@ -16,7 +15,7 @@ const Form = () => {
     
     const isEditing = classId !== 'create';
 
-    const { register, handleSubmit, formState: {errors}, setValue, control } = useForm<Class>();
+    const { register, handleSubmit, formState: {errors}, setValue } = useForm<Class>();
 
     const [selectSubject, setSelectSubject] = useState<Subject[]>();
 
@@ -30,15 +29,6 @@ const Form = () => {
     const subjectsIds = selectSubject?.map(subject => subject.id);
     const subjectsNames = selectSubject?.map(subject => subject.name);
 
-    const [selectUsers, setSelectUsers] = useState<User[]>();
-
-    useEffect(() => {
-        requestBackend({url: '/users', params: {page: 0, size: 2000, },})
-            .then(response => {
-                setSelectUsers(response.data.content)
-            })
-    }, []);
-
     useEffect(() => {
         if (isEditing) {
             requestBackend({url:`/classes/${classId}`})
@@ -48,11 +38,9 @@ const Form = () => {
 
                     setValue('code', c.code);
                     setValue('limitOfStudents', c.limitOfStudents);
-
                     setValue('subjectId', c.subjectId);
-                    setValue('students', c.students);
                     
-                    subjectsIds?.map(m => (m))
+                    subjectsIds?.map(m => m)
                 })
         }
     }, [isEditing, classId, setValue, subjectsIds]);
@@ -93,7 +81,7 @@ const Form = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row courses-crud-inputs-container'>
-                        <div className='col-lg-6 courses-crud-inputs-left-container'>
+                        <div className='courses-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Code</label>  
@@ -135,29 +123,6 @@ const Form = () => {
                                     >
                                     {subjectsIds?.map(id => <option key={id} value={id} label={subjectsNames && subjectsNames[id-1]}></option>)}
                                 </select>
-                            </div>
-
-                            <div className='margin-bottom-30'>
-                                <label htmlFor="" style={{color:"white"}}>Users</label>  
-                                <Controller 
-                                    name = 'students'
-                                    rules = {{required: false}}
-                                    control = {control}
-                                    render = {( {field} ) => (
-                                        <Select 
-                                            {...field}
-                                            options={selectUsers?.sort((a,b) => a.name > b.name ? 1 : -1)}
-                                            classNamePrefix="courses-crud-select"
-                                            placeholder="Students"
-                                            isMulti
-                                            getOptionLabel={(c: User) => c.name}
-                                            getOptionValue={(c: User) => c.id.toString()}
-                                        />    
-                                    )}
-                                />
-                                {errors.students && (
-                                    <div className='invalid-feedback d-block'>Campo obrigatório</div>
-                                )}
                             </div>
 
                         </div>

@@ -27,12 +27,11 @@ const Form = () => {
 
                     setValue('name', user.name);
                     setValue('email', user.email);
-
                     setValue('imgUrl', user.imgUrl);
 
                     setValue('roles', user.roles);
-
-                    
+                    setValue('courses', user.courses);
+                    setValue('classes', user.classes);
                 })
         }
         
@@ -83,8 +82,6 @@ const Form = () => {
             })
     }, []);
 
-    const coursesIds = selectCourses?.map(course => course.id);
-
     const [selectClasses, setSelectClasses] = useState<Class[]>();
 
     useEffect(() => {
@@ -94,22 +91,16 @@ const Form = () => {
             })
     }, []);
 
-    const classesIds = selectClasses?.map(c => c.id);
-
-    useEffect(() => {
-        coursesIds?.map(m => m);
-        classesIds?.map(m => m);
-    }, [coursesIds, classesIds]);
 
     return(
-        <div className="students-crud-container">
+        <div className="courses-crud-container">
 
-            <div className="base-card students-card-form-card">
+            <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT USER</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='row students-crud-inputs-container'>
-                        <div className='col-lg-6 students-crud-inputs-left-container'>
+                    <div className='row courses-crud-inputs-container'>
+                        <div className='courses-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label> 
@@ -161,7 +152,51 @@ const Form = () => {
                                 <div className='invalid-feedback d-block'>{errors.imgUrl?.message}</div>
                         </div>
 
-                        
+                        <div className='margin-bottom-30'>
+                            <label htmlFor="" style={{color:"white"}}>Courses</label> 
+                                <Controller 
+                                    name = 'courses'
+                                    rules = {{required: true}}
+                                    control = {control}
+                                    render = {( {field} ) => (
+                                        <Select 
+                                            {...field}
+                                            options={selectCourses}
+                                            classNamePrefix="users-crud-select"
+                                            placeholder="Courses"
+                                            isMulti
+                                            getOptionLabel={(course: Course) => course.name}
+                                            getOptionValue={(course: Course) => course.id.toString()}
+                                        />    
+                                    )}
+                                />
+                                {errors.courses && (
+                                    <div className='invalid-feedback d-block'>Campo obrigatório</div>
+                                )}
+                        </div>
+
+                        <div className='margin-bottom-30'>
+                            <label htmlFor="" style={{color:"white"}}>Classes</label> 
+                                <Controller 
+                                    name = 'classes'
+                                    rules = {{required: true}}
+                                    control = {control}
+                                    render = {( {field} ) => (
+                                        <Select 
+                                            {...field}
+                                            options={selectClasses}
+                                            classNamePrefix="users-crud-select"
+                                            placeholder="Classes"
+                                            isMulti
+                                            getOptionLabel={(c: Class) => c.code}
+                                            getOptionValue={(c: Class) => c.id.toString()}
+                                        />    
+                                    )}
+                                />
+                                {errors.classes && (
+                                    <div className='invalid-feedback d-block'>Campo obrigatório</div>
+                                )}
+                        </div>
 
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Roles</label> 

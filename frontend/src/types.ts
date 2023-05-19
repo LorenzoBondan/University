@@ -31,7 +31,7 @@ export type Class = {
     code: string;
     limitOfStudents: number;
     subjectId: number;
-    students: User[];
+    studentsId: number[];
 }
 
 export type User = {
@@ -41,8 +41,8 @@ export type User = {
     password: string;
     imgUrl: string;
     roles : Role[];
-    classesId: number[];
-    coursesId: number[];
+    classes: Class[];
+    courses: Course[];
 }
 
 export type Role = {

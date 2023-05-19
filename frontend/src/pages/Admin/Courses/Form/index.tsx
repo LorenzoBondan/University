@@ -69,7 +69,7 @@ const Form = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row courses-crud-inputs-container'>
-                        <div className='col-lg-6 courses-crud-inputs-left-container'>
+                        <div className='courses-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label>  
