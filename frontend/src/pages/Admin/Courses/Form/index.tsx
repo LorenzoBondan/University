@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Course } from 'types';
 import { requestBackend } from 'util/requests';
-
+import './styles.css';
 
 type UrlParams = {
     courseId: string;
@@ -64,7 +64,7 @@ const Form = () => {
     
     return(
         <div className="courses-crud-container">
-            <div className="base-card courses-card-form-card">
+            <div className="courses-card-form-card base-card">
                 <h1>ADD OR EDIT COURSE</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>

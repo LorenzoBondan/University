@@ -83,13 +83,13 @@ const Form = () => {
     }
 
     return(
-        <div className="subjects-crud-container">
-            <div className="base-card subjects-card-form-card">
+        <div className="courses-crud-container">
+            <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT SUBJECT</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='row subjects-crud-inputs-container'>
-                        <div className='col-lg-6 subjects-crud-inputs-left-container'>
+                    <div className='row courses-crud-inputs-container'>
+                        <div className='col-lg-6 courses-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label>  
@@ -168,15 +168,15 @@ const Form = () => {
                         </div>
                     </div>
 
-                    <div className='subjects-crud-buttons-container'>
+                    <div className='courses-crud-buttons-container'>
                         <button 
-                            className='btn btn-outline-danger subjects-crud-buttons'
+                            className='btn btn-outline-danger courses-crud-buttons'
                             onClick={handleCancel}
                             >
                             CANCEL
                         </button>
 
-                        <button className='btn btn-primary text-white subjects-crud-buttons'>SAVE</button>
+                        <button className='btn btn-primary text-white courses-crud-buttons'>SAVE</button>
                     </div>
                 </form>
             </div>

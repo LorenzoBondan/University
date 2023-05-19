@@ -1,0 +1,27 @@
+.courses-card-form-card:hover{
+    transform: unset;
+}
+
+.courses-card-form-card h1{
+    color: #fff;
+    font-weight: 700;
+}
+
+.courses-crud-inputs-left-container{
+    width: 87%;
+}
+
+.courses-crud-buttons-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.courses-crud-buttons{
+    width: 40%;
+}
+
+.margin-bottom-30{
+    margin-bottom: 20px;
+}
