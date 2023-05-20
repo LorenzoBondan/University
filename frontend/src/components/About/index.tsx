@@ -11,7 +11,7 @@ const About = () => {
         <div className="about-container">
             <div className='row row-center'>
                 <div className="col-sm-6 col-lg-4 col-xl-2 players-column">
-                    <AboutCard text="The best private University of the south of the Country" description='We had the best performace at MEC test' imgUrl={Trophy}/>
+                    <AboutCard text="The best private University of the south of the Country" description="We had the best performace at MEC's test" imgUrl={Trophy}/>
                 </div>
                 <div className="col-sm-6 col-lg-4 col-xl-2 players-column">
                     <AboutCard text="Opened subscribes to language courses" description='The classes start at May 15' imgUrl={Speak}/>

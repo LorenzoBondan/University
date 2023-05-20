@@ -1,5 +1,5 @@
 .courses-card-form-card:hover{
-    transform: unset;
+    transform: unset !important;
 }
 
 .courses-card-form-card h1{

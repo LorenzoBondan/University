@@ -1,4 +1,30 @@
 .item{
-    height: 560px;
+    height: 200px;
+}
+
+.item img{
+    height: 100%;
+    width: 100%;
+}
+
+@media(min-width:576px){
+    .item{
+        height: 400px;
+    }
+    
+    .item img{
+        height: 400px;
+    }
+}
+
+@media(min-width:1200px){
+    .item{
+        height: 600px;
+    }
+
+    .item img{
+        height: 100%;
+    }
+
 }
 
