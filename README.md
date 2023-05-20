@@ -2,7 +2,7 @@
 
 ## About the Project
 
-This is a project of a Univesity where students can subscribe to courses and classes from subjects.
+This is a university project where students can subscribe to courses and class sections of the subjects.
 
 ## Layout desktop
 
