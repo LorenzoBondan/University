@@ -25,7 +25,10 @@ const Routes = () => {
                 </Route>
 
                 <Route path="/courses" exact>
-                    <Courses/>
+                    <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                        <Courses/>
+                    </div>
+                    
                 </Route>
 
                 <Route path="/courses/:courseId">

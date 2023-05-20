@@ -34,13 +34,11 @@ const Courses = () => {
 
     return(
         <div className='courses-container'>
-            <h1>Courses</h1>
-
             <div className="row">
                 {page?.content
                 .sort((a,b) => a.name > b.name ? 1 : -1)
                 .map(course => (
-                    <div className="col-sm-6 col-lg-6 col-xl-3 courses-column" key={course.id}>
+                    <div className="col-sm-6 col-lg-6 col-xl-4 courses-column" key={course.id}>
                         <Link to={`/courses/${course.id}`}>
                             <CourseCard course={course}/>
                         </Link>
