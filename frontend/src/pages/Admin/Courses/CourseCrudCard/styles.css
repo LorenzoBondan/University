@@ -25,10 +25,17 @@
     flex: 1;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .course-crud-card-buttons-container button{
-    width: 100%;
     background-color: aquamarine;
+}
+
+.course-crud-card-button{
+    width: 90px;
+}
+
+.delete-button{
+    background-color: unset !important;
 }

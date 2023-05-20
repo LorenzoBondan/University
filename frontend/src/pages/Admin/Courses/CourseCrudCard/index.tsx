@@ -1,13 +1,33 @@
+import { AxiosRequestConfig } from 'axios';
 import './styles.css';
 
 import { Link } from 'react-router-dom';
 import { Course } from 'types';
+import { requestBackend } from 'util/requests';
 
 type Props = {
   course : Course;
+  onDelete : Function;
 }
 
-function CourseCrudCard( {course} : Props ) {
+function CourseCrudCard( {course, onDelete} : Props ) {
+
+  const handleDelete = (courseId : number) => {
+    
+    if(!window.confirm("Are you sure that you want to delete the course?")){ // messagebox
+      return;
+    }
+
+    const params : AxiosRequestConfig = {
+      method:"DELETE",
+      url: `/courses/${courseId}`,
+      withCredentials: true
+    }
+
+    requestBackend(params).then(() => {
+      onDelete();
+    })
+  }
 
     return (
       <>
@@ -22,9 +42,14 @@ function CourseCrudCard( {course} : Props ) {
             </div>
 
             <div className='course-crud-card-buttons-container'>
+              <button className='btn btn-outline-danger course-crud-card-button delete-button'
+                onClick={() => handleDelete(course.id)}
+                >
+                  DELETE
+                </button>
 
-                <Link to={`/admin/courses/${course.id}`} className='course-crud-card-buttons-container'>
-                  <button className='btn btn-outline-secondary'>
+                <Link to={`/admin/courses/${course.id}`}>
+                  <button className='btn btn-outline-secondary course-crud-card-button'>
                     EDIT
                   </button>
                 </Link>

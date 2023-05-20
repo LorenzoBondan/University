@@ -40,7 +40,7 @@ function UserCrudCard( {user, onDelete} : Props ) {
             </div>
 
             <div className='course-crud-card-buttons-container'>
-              <button className='btn btn-outline-danger course-crud-card-button'
+              <button className='btn btn-outline-danger course-crud-card-button delete-button'
                 onClick={() => handleDelete(user.id)}
                 >
                   DELETE

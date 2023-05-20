@@ -46,7 +46,7 @@ const List = () => {
               .sort((a,b) => a.name > b.name ? 1 : -1)
               .map((item) => (
                 <div className="col-sm-4 col-md-4 col-lg-3 col-xl-3 subject-crud-column" key={item.id}>
-                    <CourseCrudCard course={item} key={item.id}/>
+                    <CourseCrudCard course={item} onDelete={() => getCourses()} key={item.id}/>
                 </div>
             ))}
         </div>
