@@ -2,39 +2,45 @@
 
 ## About the Project
 
-This is a project of a Univesity where students can subscribe to courses and classes from subjects.
+This is a university project where students can subscribe to courses and class sections of the subjects.
 
 ## Layout desktop
 
 #### Home page
-![Captura de tela 2023-04-20 150146](https://user-images.githubusercontent.com/105743965/233791700-2fc0d1e8-5224-482c-ba43-3b6021b12a7e.png)
-#### Courses page
-![Captura de tela 2023-04-20 150244](https://user-images.githubusercontent.com/105743965/233456462-49c3db10-cab4-4073-ba15-5305622518e8.png)
-#### Courses details page
-![Captura de tela 2023-04-20 153356](https://user-images.githubusercontent.com/105743965/233456776-e75cfb62-013a-459b-b25d-2c10e85bb406.png)
-#### Student profile page
-![Captura de tela 2023-04-20 150303](https://user-images.githubusercontent.com/105743965/233456905-64f7a8df-2035-4424-b74c-cc6ba6f4a984.png)
-#### Admin CRUD page
-![Captura de tela 2023-04-20 150412](https://user-images.githubusercontent.com/105743965/233457267-e5a77243-0fd3-4715-917c-836d30844bf9.png)
-#### Admin editing form
-![Captura de tela 2023-04-20 150353](https://user-images.githubusercontent.com/105743965/233457331-69136d99-f39b-40eb-93e2-ee0172fead3d.png)
+![Captura de tela 2023-05-20 103531](https://github.com/LorenzoBondan/University/assets/105743965/a33afe1c-557f-44e2-8d0a-56ec155b1d3b)
 
+#### Courses page
+![courses](https://github.com/LorenzoBondan/University/assets/105743965/f5b6e0a7-68c0-476e-99a1-b792a8237ac1)
+
+#### Courses details page
+![course-details1](https://github.com/LorenzoBondan/University/assets/105743965/7803143d-3dda-4cf2-8854-bc7814f5c925)
+![course-details2](https://github.com/LorenzoBondan/University/assets/105743965/a9bdc0af-3fda-4c33-b76d-1c2d1063ef2a)
+![course-details3](https://github.com/LorenzoBondan/University/assets/105743965/9b93e91c-68d4-4410-b5f4-b956da851a0a)
+
+#### Student profile page
+![profile](https://github.com/LorenzoBondan/University/assets/105743965/fb37d566-4c68-4507-875f-35380feef52a)
+
+#### Admin CRUD page
+![Captura de tela 2023-05-20 103546](https://github.com/LorenzoBondan/University/assets/105743965/1f1a6723-38b5-4b18-9e53-359921bcc145)
+
+#### Admin editing form
+![Captura de tela 2023-05-20 103615](https://github.com/LorenzoBondan/University/assets/105743965/6fcd7316-9ad7-4f4b-b179-9895f32d7ef0)
 
 ## Class Diagram
-
-![asta](https://user-images.githubusercontent.com/105743965/233456170-f1a07d6f-7891-4875-af3f-85b87a6cbac7.png)
+![Captura de tela 2023-05-20 110343](https://github.com/LorenzoBondan/University/assets/105743965/5bc516c4-1c48-4cc7-aa10-75fd7a2fc9d7)
 
 
 ## Used technologies
 
 - Java
-- Spring
+- Spring Boot
 - SQL
 
 - TypeScript
 - React
 - CSS
 
+Spring Boot v4.15.3 | Node v14.18.2
 
 ## Author
 
