@@ -13,3 +13,10 @@
     align-items: center;
     justify-content: center;
 }
+
+@media(min-width:1200px){
+    .courses-container{
+        min-height: 100vh;
+        justify-content: flex-start;
+    }
+}

@@ -1,6 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
 import './styles.css';
-
 import { Link } from 'react-router-dom';
 import { Course } from 'types';
 import { requestBackend } from 'util/requests';
@@ -30,24 +29,19 @@ function CourseCrudCard( {course, onDelete} : Props ) {
   }
 
     return (
-      <>
         <div className='base-card course-crud-card'>
-
             <div className='course-crud-card-top-container'>
                 <img src={course.imgUrl} alt="" />
             </div>
-
             <div className='course-crud-card-bottom-container'>
               <h3>{course.name}</h3>
             </div>
-
             <div className='course-crud-card-buttons-container'>
               <button className='btn btn-outline-danger course-crud-card-button delete-button'
                 onClick={() => handleDelete(course.id)}
                 >
                   DELETE
                 </button>
-
                 <Link to={`/admin/courses/${course.id}`}>
                   <button className='btn btn-outline-secondary course-crud-card-button'>
                     EDIT
@@ -55,8 +49,6 @@ function CourseCrudCard( {course, onDelete} : Props ) {
                 </Link>
             </div>
         </div>
-        
-      </>
     );
   }
 

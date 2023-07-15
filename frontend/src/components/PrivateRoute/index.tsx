@@ -7,9 +7,7 @@ type Props = {
   roles?: Role[];
 };
 
-
 const PrivateRoute = ({ children, path, roles = [] }: Props) => {
-
   return (
     <Route
       path={path}

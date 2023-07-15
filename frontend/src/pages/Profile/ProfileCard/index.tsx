@@ -1,65 +1,40 @@
-
-import { useCallback, useEffect, useState } from 'react';
-import { AxiosRequestConfig } from 'axios';
-import { requestBackend } from 'util/requests';
-
 import './styles.css';
-import {User } from 'types';
-
+import { User } from 'types';
 
 type Props ={
-    userEmail: string | undefined;
+    user: User;
 }
 
-const ProfileCard = ({userEmail} : Props) => {
-
-    const [page, setPage] = useState<User>();
-
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${userEmail}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
-            setPage(response.data);
-          })
-      }, [userEmail])
-
-      useEffect(() => {
-        getUser();
-      }, [getUser]);
-
+const ProfileCard = ({user} : Props) => {
     return(
         <div className='profile-card-container'>
             <div className='profile-card-image-container'>
-                <img src={page?.imgUrl} alt="" />
+                <img src={user?.imgUrl} alt="" />
             </div>
-
             <div className='profile-card-content-container'>
-                <h1>{page?.name}</h1>
-                <h4>{page?.email}</h4>
+                <h1>{user?.name}</h1>
+                <h4>{user?.email}</h4>
             </div>
-
-            {page?.courses && (
+            {user?.courses && (
                 <div className='profile-card-courses-container'>
-                    <h2>Courses</h2>
-                    {page.courses.map(c => (
-                        <p key={c.id}>{c.name}</p>
+                    <h2>Courses <span>({user.courses.length})</span></h2>
+                    {user.courses.map(c => (
+                        <div className='profile-card-courses-row'>
+                            <p key={c.id}>{c.name}</p>
+                        </div>
                     ))}
                 </div>
             )}
-
-            {page?.classes && (
+            {user?.classes && (
                 <div className='profile-card-courses-container'>
-                    <h2>Classes</h2>
-                    {page.classes.map(c => 
-                        <p key={c.id}> + {c.code}</p>
-                    )}
+                    <h2>Classes <span>({user.classes.length})</span></h2>
+                    <div className='profile-card-courses-row'>
+                        {user.classes.map(c => 
+                            <p key={c.id}> + {c.code}</p>
+                        )}
+                    </div>
                 </div>
             )}
-
         </div>
     );
 }

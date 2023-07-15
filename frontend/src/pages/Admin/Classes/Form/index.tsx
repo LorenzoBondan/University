@@ -49,7 +49,6 @@ const Form = () => {
 
     const onSubmit = (formData : Class) => {
 
-        // data: formData
         const params : AxiosRequestConfig = {
             method: isEditing? "PUT" : "POST",
             url: isEditing? `/classes/${classId}` : "/classes",
@@ -61,13 +60,10 @@ const Form = () => {
         .then(response => {
             console.log('SUCCESS', response.data);
             history.push("/admin/classes");
-
-            /*toast.success('Student cadastrado com sucesso!');*/
         })
         .catch(() => {
             console.log('error');
-        })
-        ;
+        });
     };
 
     const handleCancel = () => {
@@ -78,11 +74,9 @@ const Form = () => {
         <div className="courses-crud-container">
             <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT CLASS</h1>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row courses-crud-inputs-container'>
                         <div className='courses-crud-inputs-left-container'>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Code</label>  
                                 <input 
@@ -96,7 +90,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.code?.message}</div>
                             </div>
-                            
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Limit of Students</label>  
                                 <input 
@@ -110,7 +103,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.limitOfStudents?.message}</div>
                             </div>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Subject Id</label>  
                                 <select
@@ -124,10 +116,8 @@ const Form = () => {
                                     {subjectsIds?.map(id => <option key={id} value={id} label={subjectsNames && subjectsNames[id-1]}></option>)}
                                 </select>
                             </div>
-
                         </div>
                     </div>
-
                     <div className='courses-crud-buttons-container'>
                         <button 
                             className='btn btn-outline-danger courses-crud-buttons'
@@ -135,12 +125,10 @@ const Form = () => {
                             >
                             CANCEL
                         </button>
-
                         <button className='btn btn-primary text-white courses-crud-buttons'>SAVE</button>
                     </div>
                 </form>
             </div>
-            
         </div>
     );
 }

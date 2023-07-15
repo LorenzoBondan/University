@@ -1,4 +1,3 @@
-
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -42,7 +41,6 @@ const Form = () => {
 
     const [selectRoles, setSelectRoles] = useState<Role[]>();
 
-    //trazer os roles pra povoar o combobox
     useEffect(() => {
         requestBackend({url: '/roles', params: {page: 0, size: 50, }, withCredentials: true})
             .then(response => {
@@ -69,7 +67,6 @@ const Form = () => {
             })
     };
 
-    // botão de cancelar -> reenvia o usuário para a lista de produtos, saindo do form
     const handleCancel = () => {
         history.push("/admin/users")
     }
@@ -92,17 +89,13 @@ const Form = () => {
             })
     }, []);
 
-
     return(
         <div className="courses-crud-container">
-
             <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT USER</h1>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row courses-crud-inputs-container'>
                         <div className='courses-crud-inputs-left-container'>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label> 
                                 <input 
@@ -116,7 +109,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.name?.message}</div>
                             </div>
-                            
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Email</label> 
                                 <input 
@@ -134,7 +126,6 @@ const Form = () => {
                                 <div className='invalid-feedback d-block'>{errors.email?.message}</div>
                             </div>
                         </div>
-
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Password</label> 
                                 <input 
@@ -146,9 +137,7 @@ const Form = () => {
                                     name="password"
                                 />
                                 <div className='invalid-feedback d-block'>{errors.password?.message}</div>
-
                             </div>
-
                         <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Img Url</label>  
                                 <input 
@@ -166,7 +155,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.imgUrl?.message}</div>
                         </div>
-
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Courses</label> 
                                 <Controller 
@@ -189,7 +177,6 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                         </div>
-
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Classes</label> 
                                 <Controller 
@@ -212,7 +199,6 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                         </div>
-
                         <div className='margin-bottom-30'>
                             <label htmlFor="" style={{color:"white"}}>Roles</label> 
                                 <Controller 
@@ -235,7 +221,6 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                         </div>
-
                         <div className='students-crud-buttons-container'>
                             <button 
                                 className='btn btn-outline-danger students-crud-buttons'
@@ -245,10 +230,8 @@ const Form = () => {
                             </button>
                             <button className='btn btn-primary text-white students-crud-buttons'>SALVAR</button>
                         </div>
-
                     </div>
                 </form>
-            
             </div>
         </div>
     );

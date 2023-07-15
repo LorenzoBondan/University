@@ -1,11 +1,7 @@
-
 import { AxiosRequestConfig } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
-
-
 import './styles.css';
-
 import { Link } from 'react-router-dom';
 import { Course, SpringPage } from 'types';
 import CourseCrudCard from '../CourseCrudCard';
@@ -18,9 +14,6 @@ const List = () => {
     const params: AxiosRequestConfig = {
       method: "GET",
       url: "/courses",
-      params: {
-        size: 2000
-      },
     }
 
     requestBackend(params)
@@ -32,7 +25,6 @@ const List = () => {
   useEffect(() => {
     getCourses();
   }, [getCourses]);
-
 
   return (
     <div className='courses-crud-container'>

@@ -57,7 +57,6 @@ const Form = () => {
 
     const onSubmit = (formData : Subject) => {
 
-        // data: formData
         const params : AxiosRequestConfig = {
             method: isEditing? "PUT" : "POST",
             url: isEditing? `/subjects/${subjectId}` : "/subjects",
@@ -69,13 +68,10 @@ const Form = () => {
         .then(response => {
             console.log('SUCCESS', response.data);
             history.push("/admin/subjects");
-
-            /*toast.success('Student cadastrado com sucesso!');*/
         })
         .catch(() => {
             console.log('error');
-        })
-        ;
+        });
     };
 
     const handleCancel = () => {
@@ -86,11 +82,9 @@ const Form = () => {
         <div className="courses-crud-container">
             <div className="base-card courses-card-form-card">
                 <h1>ADD OR EDIT SUBJECT</h1>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row courses-crud-inputs-container'>
                         <div className='courses-crud-inputs-left-container'>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Name</label>  
                                 <input 
@@ -104,7 +98,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.name?.message}</div>
                             </div>
-                            
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Semester</label>  
                                 <input 
@@ -118,7 +111,6 @@ const Form = () => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.semester?.message}</div>
                             </div>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Courses</label>  
                                 <Controller 
@@ -141,7 +133,6 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                             </div>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"white"}}>Classes</label>  
                                 <Controller 
@@ -164,10 +155,8 @@ const Form = () => {
                                     <div className='invalid-feedback d-block'>Campo obrigatório</div>
                                 )}
                             </div>
-
                         </div>
                     </div>
-
                     <div className='courses-crud-buttons-container'>
                         <button 
                             className='btn btn-outline-danger courses-crud-buttons'
@@ -175,12 +164,10 @@ const Form = () => {
                             >
                             CANCEL
                         </button>
-
                         <button className='btn btn-primary text-white courses-crud-buttons'>SAVE</button>
                     </div>
                 </form>
             </div>
-            
         </div>
     );
 }

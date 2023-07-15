@@ -30,7 +30,6 @@ const Banner = () => {
     return(
         <div className="banner-container" id="banner">
             <div className="banner-box wow zoomIn">
-
                 <Carousel responsive={responsive} infinite={true} className="banner-slider" autoPlay={true} autoPlaySpeed={2500}>
                     <div className="item">
                         <img src={Slide1} alt="" />

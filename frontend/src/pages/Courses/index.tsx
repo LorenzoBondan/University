@@ -1,4 +1,3 @@
-
 import { Course, SpringPage } from 'types';
 import './styles.css';
 import { useCallback, useEffect, useState } from 'react';
@@ -14,11 +13,7 @@ const Courses = () => {
     const getCourses = useCallback(() => {
         const params : AxiosRequestConfig = {
           method:"GET",
-          url: "/courses",
-          params: {
-            page: 0,
-            size: 300
-          },
+          url: "/courses"
         }
     
         requestBackend(params) 
@@ -43,11 +38,9 @@ const Courses = () => {
                             <CourseCard course={course}/>
                         </Link>
                     </div>
-                    )
-                )
+                  ))
                 }
             </div>
-
         </div>
     );
 }

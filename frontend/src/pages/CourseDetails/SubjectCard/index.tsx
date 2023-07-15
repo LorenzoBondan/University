@@ -75,41 +75,37 @@ const SubjectCard = ({subjectId, userId} : Props) => {
 
     return(
         <div className='subjects-container'>
-                {subject && 
-                    <div className='subject' key={subject.id}>
-                        <div className='subject-properties'>
-                            <h4>{subject.name}</h4>
-                            <img src={Plus} onClick={() => openAndCloseClasses()} className='' alt=""/>
-                        </div>
-                        
-                        <div className='subject-bottom'>
-                            <p>{subject.semester}th Semester</p>
-                        </div>
-
-                        {showClasses && 
-
-                            <div className='classes-container'>
-                                <h3>Classes</h3>
-                                {subject.classes.map(c => (
-                                    <div className='classes' key={c.id}>
-                                        <h6>{subject.name} + {c.code}</h6>
-                                        <p>Limit of students: {c.limitOfStudents}</p>
-
-                                        {isAuthenticated() && (
-                                            subscribedToClass ? (
-                                                <button className='btn btn-primary' onClick={() => unsubscribeInClass(c.id)}>Unsubscribe</button>
-                                                ) : (
-                                                <button className='btn btn-primary' onClick={() => subscribeInClass(c.id)}>Subscribe</button> 
-                                                )   
-                                            )
-                                        }
-                                    </div>
-                                ))}
-                            </div>
-                        }
-
+            {subject && 
+                <div className='subject' key={subject.id}>
+                    <div className='subject-properties'>
+                        <h4>{subject.name}</h4>
+                        <img src={Plus} onClick={() => openAndCloseClasses()} className='' alt=""/>
                     </div>
-                }
+                    <div className='subject-bottom'>
+                        <p>{subject.semester}th Semester</p>
+                    </div>
+                    {showClasses && 
+                        <div className='classes-container'>
+                            <h3>Classes</h3>
+                            {subject.classes.map(c => (
+                                <div className='classes' key={c.id}>
+                                    <h6>{subject.name} + {c.code}</h6>
+                                    <p>Limit of students: <strong>{c.limitOfStudents}</strong></p>
+                                    <p>Students in the class: <strong className={c.studentsId.length < c.limitOfStudents ? "color-green" : "color-red"}>{c.studentsId.length}</strong></p>
+                                    {isAuthenticated() && (
+                                        subscribedToClass ? (
+                                            <button className='btn btn-primary' onClick={() => unsubscribeInClass(c.id)}>Unsubscribe</button>
+                                            ) : (
+                                            <button className='btn btn-primary' onClick={() => subscribeInClass(c.id)}>Subscribe</button> 
+                                            )   
+                                        )
+                                    }
+                                </div>
+                            ))}
+                        </div>
+                    }
+                </div>
+            }
         </div>
     );
 }

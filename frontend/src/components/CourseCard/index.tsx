@@ -1,4 +1,3 @@
-
 import { Course } from 'types';
 import './styles.css';
 

@@ -1,7 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { requestBackend } from "util/requests";
 import UserCrudCard from "../UserCrudCard";
 import { SpringPage, User } from "types";
@@ -16,7 +15,6 @@ const List = () => {
             withCredentials: true,
           };
       
-      
           requestBackend(params).then((response) => {
             setPage(response.data);
           });
@@ -25,7 +23,6 @@ const List = () => {
     useEffect(() => {
         getUsers();
     }, []);
-
 
     return(
         <div className='courses-crud-container'>
@@ -36,7 +33,6 @@ const List = () => {
                     </button>
                 </Link>
             </div>
-
             <div className='row'>
                 {page?.content
                     .sort( (a,b) => a.name > b.name ? 1 : -1)

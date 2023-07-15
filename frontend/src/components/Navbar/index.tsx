@@ -1,12 +1,9 @@
-
 import { Link, NavLink } from 'react-router-dom';
 import './styles.css';
 import '@popperjs/core';
 import 'bootstrap/js/src/collapse';
-
 import SpringLogo from 'assets/images/spring-logo.png';
 import { getTokenData, hasAnyRoles, isAuthenticated } from 'util/auth';
-
 import { FaGraduationCap } from 'react-icons/fa';
 import { SiGoogleclassroom} from 'react-icons/si';
 import { MdOutlineAdminPanelSettings} from 'react-icons/md';
@@ -38,7 +35,6 @@ const Navbar = () => {
         }
       }, [setAuthContextData]);
 
-
       const handleLogoutClick = (event : React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault(); 
         
@@ -62,16 +58,13 @@ const Navbar = () => {
                         <h4>Spring University</h4>
                     </Link>
                 </div>
-
                 <div className='navbar-social-content-container'>
                     <a href="https://linkedin.com"><img src={linkedinIcon} alt="" /></a>
                     <a href="https://instagram.com/lorenzobondan"><img src={instagramIcon} alt="" /></a>
                     <a href="https://facebook.com/loreenzo_bondaan"><img src={facebookIcon} alt="" /></a>
                     <a href="https://github.com/LorenzoBondan"><img src={githubIcon} alt="" /></a>
-
                 </div>
             </div>
-
             <div className='navbar-bottom navbar-expand-md'>
                 <button
                     className="navbar-toggler"
@@ -84,7 +77,6 @@ const Navbar = () => {
                 >
                 <span className='navbar-toggler-icon' style={{height:"10px"}}></span>
                 </button>
-
                 <div className="collapse navbar-collapse" id="university-navbar">
                     <ul className='navbar-nav main-menu'>
                         <li>
@@ -93,7 +85,6 @@ const Navbar = () => {
                                 Courses
                             </NavLink>
                         </li>
-
                         {hasAnyRoles(["ROLE_ADMIN"]) && (
                             <li>
                                 <NavLink to="/admin" activeClassName='active'>
@@ -102,7 +93,6 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
                         )}
-                        
                         { authContextData.authenticated ? (
                             <>
                             <li>
@@ -124,11 +114,9 @@ const Navbar = () => {
                             </li>
                         )
                         }
-
                     </ul>
                 </div>
             </div>
-            
         </nav>
     );
 }

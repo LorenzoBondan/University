@@ -1,14 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
-
-
 import './styles.css';
-
 import { Link } from 'react-router-dom';
 import { SpringPage, Class } from 'types';
 import ClassCrudCard from '../SubjectCrudCard';
-
 
 const List = () => {
 
@@ -29,7 +25,6 @@ const List = () => {
   useEffect(() => {
     getclasss();
   }, [getclasss]);
-
 
   return (
     <div className='courses-crud-container'>

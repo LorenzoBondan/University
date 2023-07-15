@@ -64,7 +64,6 @@
     justify-content: center;
     align-items: center;
     width: 700px;
-
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
@@ -150,11 +149,13 @@
     font-size: 14px;
     font-style: italic;
     color: rgb(100, 100, 100);
+    margin-bottom: 0;
 }
 
 .classes button{
     border-radius: 10px;
     width: 100%;
+    margin-top: 10px;
 }
 
 .subject-properties{
@@ -170,7 +171,20 @@
     margin-bottom: 0.5rem;
 }
 
+.color-green{
+    color: green;
+}
+
+.color-red{
+    color: darkred;
+}
+
 @media(min-width:1200px){
+    .course-details-container{
+        min-height: 100vh;  
+        justify-content: flex-start;
+    }
+
     .course-details-card{
         flex-direction: row;
     }

@@ -1,4 +1,3 @@
-
 import AboutCard from './AboutCard';
 import Trophy from 'assets/images/trophy.png';
 import Speak from 'assets/images/speak.png';

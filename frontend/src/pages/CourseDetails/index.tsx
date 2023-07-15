@@ -1,12 +1,10 @@
-
 import { useParams } from 'react-router-dom';
 import './styles.css';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Course, User } from 'types';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL, requestBackend } from 'util/requests';
 import { ReactComponent as Arrow} from 'assets/images/arrow.svg';
-import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
 import SubjectCard from './SubjectCard';
 
@@ -40,48 +38,36 @@ const CourseDetails = () => {
         }
     }
 
-    // user
-    let email: string;
+    const [user, setUser] = useState<User | null>(null);
 
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
-    const [userPage, setUserPage] = useState<User>();
+    const getUser = useCallback(async () => {
+        try {
+            const email = getTokenData()?.user_name;
+
+            if (email) {
+                const params: AxiosRequestConfig = {
+                method: "GET",
+                url: `/users/email/${email}`,
+                withCredentials: true,
+            };
+
+            const response = await requestBackend(params);
+            setUser(response.data);
+        }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }, []);
 
     useEffect(() => {
-        if(isAuthenticated()){
-            setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData(),
-            })
+        getUser();
+    }, [getUser]);
 
-            const userParams : AxiosRequestConfig = {
-                method:"GET",
-                url: `/users/email/${email}`,
-                withCredentials:true
-                }
-        
-                requestBackend(userParams) 
-                    .then(response => {
-                        setUserPage(response.data);  
-                })
-        }
-        else{
-            setAuthContextData({
-            authenticated: false,
-            })
-        }
-        }, [authContextData.tokenData?.user_name, setAuthContextData]);
-    
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)
-    ) //
-
-    
     const subscribeInCourse = (courseId : number) => {
 
         const params : AxiosRequestConfig = {
             method:"PUT",
-            url: `/courses/registerInCourse/${courseId}/${userPage?.id}`,
+            url: `/courses/registerInCourse/${courseId}/${user?.id}`,
             withCredentials: true
           }
       
@@ -98,7 +84,7 @@ const CourseDetails = () => {
 
         const params : AxiosRequestConfig = {
             method:"PUT",
-            url: `/courses/unregisterInCourse/${courseId}/${userPage?.id}`,
+            url: `/courses/unregisterInCourse/${courseId}/${user?.id}`,
             withCredentials: true
           }
       
@@ -122,7 +108,6 @@ const CourseDetails = () => {
                 <div className='course-details-info-container'>
                     <p>{course?.name}</p>
                     <span>{course?.description}</span>
-
                     {isAuthenticated() && (
                         subscribedToCourse ? (
                             <button className='btn btn-primary' onClick={() => unsubscribeInCourse(course?.id)}>Unsubscribe</button>
@@ -131,15 +116,11 @@ const CourseDetails = () => {
                             )   
                         )
                     }
-
                 </div>
-
                 <div className='course-details-img-container'>
                     <img src={course?.imgUrl} alt="" />
                 </div>
-
             </div>
-
             <div className='subjects-top-container'>
                 <div className='subjects-title'>
                     <h2>Subjects</h2>
@@ -147,12 +128,10 @@ const CourseDetails = () => {
                         <Arrow/>
                     </button>
                 </div>
-                
                 {showSelect && subjectsId?.map(subjectId => (
-                    <SubjectCard subjectId={subjectId} userId={userPage?.id} key={subjectId}/>
+                    <SubjectCard subjectId={subjectId} userId={user?.id} key={subjectId}/>
                 ))}
             </div>
-
         </div>
     );
 }
